@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
 *{box-sizing:border-box}
 body{margin:0;background:radial-gradient(ellipse at top,#172448,#080b16 55%);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif;min-height:100vh}
 button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}
-.topbar{height:68px;padding:0 4%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12;background:#080b16eF;position:sticky;top:0;z-index:5;backdrop-filter:blur(14px)}
+.topbar{height:68px;padding:0 4%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12;background:#080b16ef;position:sticky;top:0;z-index:5;backdrop-filter:blur(14px)}
 .brand{font-size:23px;font-weight:950;letter-spacing:-1px}.brand span{color:var(--cyan)}
 .coins{border:1px solid #f4ca6544;background:#f4ca6510;padding:9px 13px;border-radius:12px;color:var(--gold);font-weight:850}
 .layout{display:grid;grid-template-columns:205px minmax(0,1fr);max-width:1550px;margin:auto;min-height:calc(100vh - 68px)}
@@ -32,6 +33,7 @@ p{color:var(--muted);line-height:1.6}
 .btn:hover{filter:brightness(1.17);transform:translateY(-1px)}
 .btn.primary{background:linear-gradient(110deg,var(--blue),#7557ef);border-color:transparent}
 .btn.gold{background:linear-gradient(110deg,#947126,#f3cb6c);color:#18120a;border:0}
+.btn.danger{background:#481c2a;border-color:#9e3652;color:#ffc6d2}
 .btnrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:16px 0}
 .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -55,6 +57,7 @@ label{font-size:12px;color:#b9c5e1;font-weight:800;display:block}
 .avatar-banner{height:100px;border:1px solid #ffffff22;border-radius:12px;background:linear-gradient(120deg,#182c62,#583b89,#112e45);margin-bottom:-35px}
 .profile-top{display:flex;gap:16px;align-items:end;margin:0 0 18px;padding:0 12px}
 .cosmetic-preview{height:100px;border-radius:12px;display:grid;place-items:center;background:radial-gradient(circle,#283c70,#11182b);border:1px solid #ffffff14;font-size:36px}
+.cosmetic-icon{font-size:34px;filter:drop-shadow(0 0 8px #ffffff20)}
 .shop-card{display:flex;flex-direction:column;gap:9px}
 .shop-card .btn{margin-top:auto}
 .shop-price{font-weight:900;color:var(--gold)}
@@ -62,6 +65,8 @@ label{font-size:12px;color:#b9c5e1;font-weight:800;display:block}
 .scroll-list{max-height:70vh;overflow-y:auto;border:1px solid var(--line);border-radius:13px;padding:0 14px;scrollbar-color:#465a94 #0c1120;scrollbar-width:thin}
 .rank{width:35px;height:35px;border-radius:9px;background:#5478ff22;display:grid;place-items:center;font-weight:900;flex-shrink:0}
 .badge-check{display:inline-flex;vertical-align:middle;color:#48a9ff;font-size:19px;font-weight:950;text-shadow:0 0 12px #48a9ff55}
+.owner-badge{display:inline-flex;align-items:center;gap:4px;border:1px solid #48a9ff50;background:#48a9ff14;border-radius:100px;padding:3px 7px;font-size:10px;font-weight:900;color:#70c0ff}
+.mod-badge{display:inline-flex;border:1px solid #5beba855;background:#5beba810;border-radius:100px;padding:3px 7px;font-size:10px;color:var(--green);font-weight:900}
 .video-box{aspect-ratio:4/3;background:#070b14;border:1px solid #283452;border-radius:13px;overflow:hidden;display:grid;place-items:center;text-align:center;color:#7e8baa}
 .video-box video{width:100%;height:100%;object-fit:cover}
 .timer{font-size:60px;font-weight:1000;text-align:center;margin:12px}
@@ -99,7 +104,7 @@ label{font-size:12px;color:#b9c5e1;font-weight:800;display:block}
   <div class="card"><div class="bigicon">🌎</div><h3>Global Battles</h3><p class="muted">Public matchmaking has no fixed 50-player cap.</p><button class="btn primary" onclick="showPage('battle')">Enter Global</button></div>
   <div class="card"><div class="bigicon">🔐</div><h3>Private Rooms</h3><p class="muted">Each private room queue has a maximum of 50 waiting players.</p><button class="btn" onclick="showPage('matchmaking')">Open Rooms</button></div>
  </div>
- <div class="info">Daily shop rotations are selected using the UTC calendar date. To make purchases and rotations shared across every device, connect a backend.</div>
+ <div class="info">Daily shop rotations are selected using the UTC calendar date. Purchases and moderation are local demos until a backend is connected.</div>
 </section>
 
 <section class="page" id="battle">
@@ -140,11 +145,11 @@ label{font-size:12px;color:#b9c5e1;font-weight:800;display:block}
 <section class="page" id="shop">
  <div class="eyebrow">Collect your style</div><h1>FLEX SHOP 🛍️</h1><p>Avatar borders, profile banners, and exclusive shop titles.</p>
  <div class="grid two">
-  <div class="card"><div class="stat">6,000+</div><div class="muted">Unique cosmetic catalog items</div></div>
+  <div class="card"><div class="stat">6,000</div><div class="muted">Unique cosmetic catalog items</div></div>
   <div class="card"><div class="stat">30</div><div class="muted">Items in each daily rotation</div></div>
  </div>
  <div class="card"><div class="item-row"><div><strong>Today's rotation</strong><div class="muted" id="rotationDate">UTC daily selection</div></div><span class="pill green">30 ITEMS</span></div><div class="grid two"><div><label for="shopType">Cosmetic type</label><select id="shopType" class="field" onchange="renderShop()"><option value="all">All cosmetics</option><option value="border">Avatar borders</option><option value="banner">Profile banners</option><option value="title">Shop titles</option></select></div><div><label for="shopSearch">Search cosmetics</label><input id="shopSearch" class="field" placeholder="Search today's items" oninput="renderShop()"></div></div><div id="shopItems" class="shop-grid"></div><div class="btnrow"><button class="btn" onclick="showPage('collection')">View my collection</button></div></div>
- <div class="info">The catalog generates 6,000 unique cosmetic records. Images and custom artwork can be added later. Rotation is date-based; purchases are local until cloud storage is connected.</div>
+ <div class="info">Cosmetic icons are public and visible to everyone. The catalog and rotation are generated in this browser; shared purchases require cloud storage.</div>
 </section>
 
 <section class="page" id="collection">
@@ -155,13 +160,40 @@ label{font-size:12px;color:#b9c5e1;font-weight:800;display:block}
 
 <section class="page" id="profile">
  <div class="eyebrow">Your player card</div><h1>YOUR PROFILE</h1>
- <div class="card"><div class="avatar-banner" id="mainProfileBanner"></div><div class="profile-top"><div class="avatar" id="profileAvatar">👾</div><div><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><strong id="profileDisplayName">Flexer</strong><span id="verifiedBadge" class="badge-check" style="display:none" title="Verified FlexifyGPT owner">✓</span></div><div id="profileBadges" class="muted">Player</div></div></div><label for="username">Display name</label><input id="username" class="field" maxlength="20" placeholder="Choose a display name"><button class="btn primary" onclick="saveProfile()">Save Profile</button><div class="status" id="profileStatus"></div><div class="item-row"><span>Level</span><strong id="profileLevel">1</strong></div><div class="item-row"><span>Level title</span><strong id="profileTitle">Rookie</strong></div><div class="item-row"><span>Shop title</span><strong id="profileShopTitle">None equipped</strong></div><div class="item-row"><span>XP</span><strong id="profileXP">0</strong></div><div class="item-row"><span>Wins</span><strong id="profileWins">0</strong></div><div class="btnrow"><button class="btn" onclick="showPage('collection')">Customize Profile</button><button class="btn" onclick="showPage('titles')">View Titles</button></div></div>
- <div class="notice">Profile data is stored in this browser. Cross-device accounts need authentication and cloud storage.</div>
+ <div class="card"><div class="avatar-banner" id="mainProfileBanner"></div><div class="profile-top"><div class="avatar" id="profileAvatar">👾</div><div><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><strong id="profileDisplayName">Flexer</strong><span id="verifiedBadge" class="badge-check" style="display:none" title="FlexifyGPT owner badge">✓</span><span id="ownerLabel" class="owner-badge" style="display:none">👑 OWNER</span><span id="moderatorLabel" class="mod-badge" style="display:none">🛡️ MOD</span></div><div id="profileBadges" class="muted">Player</div></div></div><label for="username">Display name</label><input id="username" class="field" maxlength="20" placeholder="Choose a display name"><button class="btn primary" onclick="saveProfile()">Save Profile</button><div class="status" id="profileStatus"></div><div class="item-row"><span>Level</span><strong id="profileLevel">1</strong></div><div class="item-row"><span>Level title</span><strong id="profileTitle">Rookie</strong></div><div class="item-row"><span>Shop title</span><strong id="profileShopTitle">None equipped</strong></div><div class="item-row"><span>XP</span><strong id="profileXP">0</strong></div><div class="item-row"><span>Wins</span><strong id="profileWins">0</strong></div><div class="btnrow"><button class="btn" onclick="showPage('collection')">Customize Profile</button><button class="btn" onclick="showPage('titles')">View Titles</button></div></div>
+ <div class="notice">The blue check identifies the FlexifyGPT owner within this demo. It is not verification from TikTok or another outside platform.</div>
 </section>
 
 <section class="page" id="owner">
- <div class="eyebrow">Restricted controls</div><h1>OWNER CONTROL PANEL 👑</h1>
- <div class="card"><div class="bigicon">👑</div><span class="pill goldtext">OWNER-ONLY FEATURES</span><h2 style="margin-top:12px">Owner privileges</h2><p>Exclusive OWNER title, blue verification badge, unlimited coin spending, all cosmetics for testing, and management controls for the shop.</p><div class="item-row"><span>Owner title</span><strong>OWNER</strong></div><div class="item-row"><span>Verified owner badge</span><span class="badge-check">✓</span></div><div class="item-row"><span>Coin spending</span><strong>Unlimited</strong></div><div class="item-row"><span>Cosmetic access</span><strong>All catalog items</strong></div><div class="item-row"><span>Shop rotation</span><strong>Management access</strong></div><div class="notice">Owner authentication is NOT configured in this HTML. The panel is a preview until a secure backend identifies your account and enforces these privileges on the server. Do not deploy owner powers based only on a browser variable.</div><div class="status" id="ownerStatus">Owner account verification is not connected.</div></div>
+ <div class="eyebrow">Owner and moderation</div><h1>OWNER CONTROL PANEL 👑</h1>
+ <div class="card">
+  <div class="bigicon">👑</div><span class="pill goldtext">OWNER-ONLY DEMO</span>
+  <h2 style="margin-top:12px">TikTokFlexifyGPT</h2>
+  <p>Owner perks are assigned in this local demo when the active display name matches the configured owner username. This is not secure authentication.</p>
+  <div class="item-row"><span>Owner title</span><strong>OWNER</strong></div>
+  <div class="item-row"><span>Verified-style badge</span><span class="badge-check">✓</span></div>
+  <div class="item-row"><span>Coin balance</span><strong>Unlimited ♾️</strong></div>
+  <div class="item-row"><span>Cosmetic access</span><strong>All catalog items</strong></div>
+  <div class="notice">Do not use the display-name check below as real security. Anyone can change a browser profile name. Secure owner authentication must be implemented on a backend before publishing this as a real multiplayer site.</div>
+  <div class="status" id="ownerStatus">Owner demo status.</div>
+ </div>
+ <div class="sectionhead"><h2>Ban and unban players</h2><span class="pill">LOCAL DEMO</span></div>
+ <div class="card">
+  <label for="moderationName">Player username</label><input id="moderationName" class="field" maxlength="40" placeholder="Enter player's username">
+  <label for="moderationReason">Reason</label><input id="moderationReason" class="field" maxlength="200" placeholder="Reason for action">
+  <div class="btnrow"><button class="btn danger" onclick="banPlayer()">🚫 Ban player</button><button class="btn" onclick="unbanPlayer()">Unban player</button></div>
+  <div id="banStatus" class="status"></div>
+  <h3 style="margin-top:18px">Banned players</h3><div id="bannedList"></div>
+ </div>
+ <div class="sectionhead"><h2>Moderator management</h2><span class="pill">LOCAL DEMO</span></div>
+ <div class="card">
+  <label for="moderatorName">Player username</label><input id="moderatorName" class="field" maxlength="40" placeholder="Enter player's username">
+  <div class="btnrow"><button class="btn primary" onclick="makeModerator()">🛡️ Promote to moderator</button><button class="btn" onclick="removeModerator()">Remove moderator</button></div>
+  <div id="modStatus" class="status"></div>
+  <h3 style="margin-top:18px">Moderator team</h3><div id="moderatorList"></div>
+ </div>
+ <div class="sectionhead"><h2>Admin activity log</h2><button class="btn" onclick="clearAdminLog()">Clear log</button></div>
+ <div class="card"><div id="adminLog"></div></div>
 </section>
 
 <section class="page" id="socials">
@@ -179,10 +211,13 @@ label{font-size:12px;color:#b9c5e1;font-weight:800;display:block}
 <script>
 "use strict";
 
-/* OWNER SECURITY:
-   Do not grant privileges based on a display name or a client-editable flag.
-   Set up authentication and verify owner permissions on your backend before
-   enabling infinite coins, the owner badge, or privileged admin actions. */
+/*
+ DEMO SECURITY NOTICE:
+ This file uses browser-local data. Owner-name checks and moderation actions
+ are NOT secure. Do not use this implementation for real multiplayer security.
+ A backend must authenticate accounts and enforce permissions server-side.
+*/
+const OWNER_USERNAME = "TikTokFlexifyGPT";
 const OWNER_AUTH_READY = false;
 const OWNER_TITLE = "OWNER";
 const MAX_LEVEL = 999;
@@ -199,13 +234,16 @@ const NAV=[
 const DEFAULT={
  coins:100,xp:0,wins:0,username:"Flexer",owned:[],
  equippedBorder:"",equippedBanner:"",equippedTitle:"",
- suggestion:""
+ suggestion:"",bannedPlayers:[],moderators:[],adminLog:[]
 };
 let state;
 try{
  const old=JSON.parse(localStorage.getItem("flexifygpt_v2")||"{}");
  state={...DEFAULT,...old};
  if(!Array.isArray(state.owned))state.owned=[];
+ if(!Array.isArray(state.bannedPlayers))state.bannedPlayers=[];
+ if(!Array.isArray(state.moderators))state.moderators=[];
+ if(!Array.isArray(state.adminLog))state.adminLog=[];
 }catch(e){state={...DEFAULT};}
 
 let cameraStream=null,micStream=null,micOn=false,timerInterval=null,timerRemaining=15;
@@ -243,8 +281,17 @@ function levelTitle(level){
  for(const t of LEVELS){if(t.level<=level)result=t;else break;}
  return result;
 }
+function isOwner(){return (state.username||"").trim().toLowerCase()===OWNER_USERNAME.toLowerCase();}
+function isModerator(name){return state.moderators.some(n=>n.toLowerCase()===String(name).toLowerCase());}
 function persist(){try{localStorage.setItem("flexifygpt_v2",JSON.stringify(state));}catch(e){}}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+/* Cosmetic icon sets: visible to everyone in shop, collection, and rotation. */
+const COSMETIC_ICONS={
+ border:["⭕","💠","🔷","💎","✨","🌟","🌀","⚡","🔹","🪩"],
+ banner:["🏳️","🌌","🌈","🌠","🌅","🌃","☄️","🌊","🌄","💫"],
+ title:["🏷️","👑","🔥","💫","⚔️","🛡️","🏆","💯","⭐","💎"]
+};
 
 /* 6,000 generated catalog records: 3 types x 10 themes x 20 designs x 10 variants. */
 const TYPES=["border","banner","title"];
@@ -252,7 +299,6 @@ const THEMES=["Neon","Cyber","Royal","Shadow","Cosmic","Inferno","Frost","Emeral
 const DESIGNS=["Pulse","Nova","Phantom","Rift","Vortex","Comet","Titan","Echo","Glitch","Orbit","Storm","Prism","Specter","Matrix","Quantum","Solar","Lunar","Apex","Drift","Genesis"];
 const VARIANTS=["I","II","III","IV","V","VI","VII","VIII","IX","X"];
 const TYPE_NAMES={border:"Avatar Border",banner:"Profile Banner",title:"Shop Title"};
-const TYPE_ICONS={border:"⭕",banner:"🏳️",title:"🏷️"};
 const RARITIES=["Common","Uncommon","Rare","Epic","Legendary","Mythic"];
 const RARITY_CLASS={"Common":"","Uncommon":"green","Rare":"purple","Epic":"purple","Legendary":"goldtext","Mythic":"goldtext"};
 const CATALOG=[];
@@ -263,12 +309,13 @@ for(let t=0;t<TYPES.length;t++){
     const idx=CATALOG.length;
     const type=TYPES[t],theme=THEMES[th],design=DESIGNS[d],variant=VARIANTS[v];
     const rarity=RARITIES[(th+d+v)%RARITIES.length];
+    const iconList=COSMETIC_ICONS[type];
     CATALOG.push({
      id:"fx-"+String(idx+1).padStart(4,"0"),
      type,theme,design,variant,
      name:theme+" "+design+" "+variant,
      rarity,price:priceForRarity(rarity,type),
-     icon:type==="border"?"⭕":type==="banner"?"🏳️":"🏷️",
+     icon:iconList[(th*20+d*10+v)%iconList.length],
      color:themeColor(th)
     });
    }
@@ -280,7 +327,7 @@ function priceForRarity(rarity,type){
  return base+(type==="banner"?20:type==="title"?10:0);
 }
 function themeColor(i){
- return ["#54e2ff","#8c7bff","#ffda79","#a66bff","#53a6ff","#ff647c","#b5dfff","#5beba8","#8d90ff","#ff91d4"][i];
+ return ["#54e2ff","#8c7bff","#ffda79","#a66bff","#53a6ff","#ff647c","#b5dfff","#5beba5","#8d90ff","#ff91d4"][i];
 }
 
 /* Stable, repeatable 30-item UTC daily rotation. */
@@ -337,24 +384,28 @@ function render(){
  const nextLevel=Math.min(MAX_LEVEL,level+1);
  const currentXP=xpForLevel(level),nextXP=xpForLevel(nextLevel);
  const pct=level>=MAX_LEVEL?100:Math.max(0,Math.min(100,Math.round((state.xp-currentXP)/Math.max(1,nextXP-currentXP)*100)));
- document.getElementById("coinCount").textContent=Number.isFinite(state.coins)?state.coins.toLocaleString():"∞";
+ const owner=isOwner();
+ document.getElementById("coinCount").textContent=owner?"∞":Number(state.coins).toLocaleString();
  document.getElementById("homeLevel").textContent=level;
- document.getElementById("homeTitle").textContent=title.name;
- document.getElementById("homeCoins").textContent=Number.isFinite(state.coins)?state.coins.toLocaleString():"∞";
+ document.getElementById("homeTitle").textContent=owner?OWNER_TITLE:title.name;
+ document.getElementById("homeCoins").textContent=owner?"∞":Number(state.coins).toLocaleString();
  document.getElementById("homeWins").textContent=state.wins;
- document.getElementById("progressTitle").textContent=title.name;
+ document.getElementById("progressTitle").textContent=owner?OWNER_TITLE:title.name;
  document.getElementById("progressText").textContent=level>=MAX_LEVEL?"Maximum level reached!":(state.xp-currentXP).toLocaleString()+" / "+(nextXP-currentXP).toLocaleString()+" XP to level "+nextLevel;
  document.getElementById("progressPercent").textContent=pct+"%";
  document.getElementById("xpBar").style.width=pct+"%";
  document.getElementById("profileDisplayName").textContent=state.username||"Flexer";
  document.getElementById("profileLevel").textContent=level+" / "+MAX_LEVEL;
- document.getElementById("profileTitle").textContent=title.name;
+ document.getElementById("profileTitle").textContent=owner?OWNER_TITLE:title.name;
  document.getElementById("profileShopTitle").textContent=state.equippedTitle||"None equipped";
  document.getElementById("profileXP").textContent=state.xp.toLocaleString();
  document.getElementById("profileWins").textContent=state.wins;
  document.getElementById("username").value=state.username||"";
  document.getElementById("suggestion").value=state.suggestion||"";
  document.getElementById("leaderLocal").textContent=state.username||"Flexer";
+ document.getElementById("verifiedBadge").style.display=owner?"inline-flex":"none";
+ document.getElementById("ownerLabel").style.display=owner?"inline-flex":"none";
+ document.getElementById("moderatorLabel").style.display=isModerator(state.username)?"inline-flex":"none";
  renderProfileCosmetics();
 }
 function renderLevels(){
@@ -367,14 +418,15 @@ function renderLevels(){
 }
 function itemCard(item,context){
  const owned=state.owned.includes(item.id);
- const equipped=(item.type==="border"&&state.equippedBorder===item.id)||(item.type==="banner"&&state.equippedBanner===item.id)||(item.type==="title"&&state.equippedTitle===item.id);
+ const owner=isOwner();
+ const equipped=(item.type==="border"&&state.equippedBorder===item.id)||(item.type==="banner"&&state.equippedBanner===item.id)||(item.type==="title"&&state.equippedTitle===item.name);
  let button="";
  if(context==="shop"){
-  button=owned?`<button class="btn" onclick="equipItem('${item.id}')">${equipped?"Equipped ✓":"Equip"}</button>`:`<button class="btn primary" onclick="buyItem('${item.id}')">Buy 🪙 ${item.price}</button>`;
+  button=owned?`<button class="btn" onclick="equipItem('${item.id}')">${equipped?"Equipped ✓":"Equip"}</button>`:`<button class="btn primary" onclick="buyItem('${item.id}')">${owner?"Claim free":"Buy 🪙 "+item.price.toLocaleString()}</button>`;
  }else{
   button=equipped?'<button class="btn" disabled>Equipped ✓</button>':`<button class="btn primary" onclick="equipItem('${item.id}')">Equip</button>`;
  }
- return `<div class="card shop-card"><div class="cosmetic-preview" style="border-color:${item.color};box-shadow:inset 0 0 25px ${item.color}22">${item.icon}</div><span class="pill ${RARITY_CLASS[item.rarity]||""}">${item.rarity.toUpperCase()}</span><h3>${esc(item.name)}</h3><div class="muted">${TYPE_NAMES[item.type]} · ${item.id}</div><div class="shop-price">${owned?"Owned":"🪙 "+item.price.toLocaleString()}</div>${button}</div>`;
+ return `<div class="card shop-card"><div class="cosmetic-preview" style="border-color:${item.color};box-shadow:inset 0 0 25px ${item.color}22"><span class="cosmetic-icon" title="${esc(TYPE_NAMES[item.type])}">${item.icon}</span></div><span class="pill ${RARITY_CLASS[item.rarity]||""}">${item.rarity.toUpperCase()}</span><h3>${esc(item.name)}</h3><div class="muted">${TYPE_NAMES[item.type]} · ${item.id}</div><div class="shop-price">${owned?"Owned":owner?"OWNER FREE":"🪙 "+item.price.toLocaleString()}</div>${button}</div>`;
 }
 function renderShop(){
  const date=utcDateKey();
@@ -389,12 +441,15 @@ function buyItem(id){
  const item=CATALOG.find(i=>i.id===id);
  if(!item||state.owned.includes(id))return;
  if(!dailyRotation.some(i=>i.id===id)){alert("This item is not in today's rotation.");return;}
- if(state.coins<item.price){alert("You need more coins for this cosmetic.");return;}
- state.coins-=item.price;state.owned.push(id);persist();render();renderShop();
+ if(!isOwner()&&state.coins<item.price){alert("You need more coins for this cosmetic.");return;}
+ if(!isOwner())state.coins-=item.price;
+ state.owned.push(id);persist();render();renderShop();
 }
 function equipItem(id){
  const item=CATALOG.find(i=>i.id===id);
- if(!item||!state.owned.includes(id))return;
+ if(!item)return;
+ if(!state.owned.includes(id)&&!isOwner())return;
+ if(isOwner()&&!state.owned.includes(id))state.owned.push(id);
  if(item.type==="border")state.equippedBorder=id;
  if(item.type==="banner")state.equippedBanner=id;
  if(item.type==="title")state.equippedTitle=item.name;
@@ -402,8 +457,10 @@ function equipItem(id){
 }
 function renderCollection(){
  const type=document.getElementById("collectionType").value;
- const items=state.owned.map(id=>CATALOG.find(i=>i.id===id)).filter(Boolean).filter(i=>type==="all"||i.type===type);
- document.getElementById("ownedCount").textContent=state.owned.length+" ITEMS";
+ const ownedItems=state.owned.map(id=>CATALOG.find(i=>i.id===id)).filter(Boolean);
+ const ownerItems=isOwner()?CATALOG.filter(i=>!state.owned.includes(i.id)):[];
+ const items=[...ownedItems,...ownerItems].filter(i=>type==="all"||i.type===type);
+ document.getElementById("ownedCount").textContent=isOwner()?"ALL 6,000 AVAILABLE":state.owned.length+" ITEMS";
  document.getElementById("collectionItems").innerHTML=items.map(i=>itemCard(i,"collection")).join("")||'<div class="empty">No cosmetics owned yet. Visit the Flex Shop to collect your first item!</div>';
  renderProfileCosmetics();
 }
@@ -423,9 +480,12 @@ function renderProfileCosmetics(){
  document.getElementById("equippedBannerName").textContent=banner?banner.name:"Default";
  document.getElementById("equippedTitleName").textContent=title;
  document.getElementById("collectionName").textContent=state.username||"Flexer";
- document.getElementById("collectionBadges").textContent=levelTitle(levelForXP(state.xp)).name+(title!=="None"?" · "+title:"");
- document.getElementById("profileBadges").textContent=levelTitle(levelForXP(state.xp)).name+(title!=="None"?" · "+title:"");
- document.getElementById("verifiedBadge").style.display="none";
+ const owner=isOwner();
+ const baseTitle=levelTitle(levelForXP(state.xp)).name;
+ const badges=(owner?"👑 OWNER · ☑ VERIFIED · ":"")+(isModerator(state.username)?"🛡 MOD · ":"")+baseTitle+(title!=="None"?" · "+title:"");
+ document.getElementById("collectionBadges").textContent=badges;
+ document.getElementById("profileBadges").textContent=badges;
+ document.getElementById("verifiedBadge").style.display=owner?"inline-flex":"none";
 }
 function renderLeaderboard(){
  const list=document.getElementById("leaderList");
@@ -439,16 +499,84 @@ function renderLeaderboard(){
   const detail=isMe?`Your local profile · Level ${levelForXP(state.xp)}`:"Empty ranking slot · Real player data not connected";
   const score=isMe?(sort==="wins"?state.wins:sort==="xp"?state.xp:levelForXP(state.xp)):"—";
   if(query&&!name.toLowerCase().includes(query)&&!String(rank).includes(query))continue;
-  html+=`<div class="item-row"><div class="rank">#${rank}</div><div style="flex:1;min-width:0"><strong>${esc(name)}${isMe?' <span class="pill">YOU</span>':''}</strong><div class="muted">${detail}</div></div><strong>${score}</strong></div>`;
+  html+=`<div class="item-row"><div class="rank">#${rank}</div><div style="flex:1;min-width:0"><strong>${esc(name)}${isOwner()&&isMe?' <span class="badge-check" title="FlexifyGPT owner">✓</span>':''}${isModerator(name)?' <span class="mod-badge">MOD</span>':''}${isMe?' <span class="pill">YOU</span>':''}</strong><div class="muted">${detail}</div></div><strong>${score}</strong></div>`;
  }
  list.innerHTML=html||'<div class="empty">No matching positions.</div>';
 }
+function adminAllowed(){
+ if(!isOwner()){
+  alert("Owner demo access only. Set your local display name to the configured owner username to preview the panel. This is not secure authentication.");
+  return false;
+ }
+ return true;
+}
+function logAdmin(action,player,reason){
+ state.adminLog.unshift({action,player,reason:reason||"",at:new Date().toLocaleString()});
+ state.adminLog=state.adminLog.slice(0,100);
+ persist();renderAdminLists();
+}
+function banPlayer(){
+ if(!adminAllowed())return;
+ const name=document.getElementById("moderationName").value.trim();
+ const reason=document.getElementById("moderationReason").value.trim();
+ if(!name){document.getElementById("banStatus").textContent="Enter a username first.";return;}
+ if(name.toLowerCase()===OWNER_USERNAME.toLowerCase()){document.getElementById("banStatus").textContent="The owner account cannot be banned from this demo panel.";return;}
+ if(state.bannedPlayers.some(n=>n.toLowerCase()===name.toLowerCase())){document.getElementById("banStatus").textContent="That username is already on the local ban list.";return;}
+ state.bannedPlayers.push(name);
+ logAdmin("BANNED",name,reason);
+ document.getElementById("banStatus").textContent="Added "+name+" to the local demo ban list. This does not block website access.";
+}
+function unbanPlayer(){
+ if(!adminAllowed())return;
+ const name=document.getElementById("moderationName").value.trim();
+ if(!name){document.getElementById("banStatus").textContent="Enter a username first.";return;}
+ const before=state.bannedPlayers.length;
+ state.bannedPlayers=state.bannedPlayers.filter(n=>n.toLowerCase()!==name.toLowerCase());
+ if(before===state.bannedPlayers.length){document.getElementById("banStatus").textContent="That username was not on the local ban list.";return;}
+ logAdmin("UNBANNED",name,"");persist();
+ document.getElementById("banStatus").textContent="Removed "+name+" from the local demo ban list.";
+}
+function makeModerator(){
+ if(!adminAllowed())return;
+ const name=document.getElementById("moderatorName").value.trim();
+ if(!name){document.getElementById("modStatus").textContent="Enter a username first.";return;}
+ if(name.toLowerCase()===OWNER_USERNAME.toLowerCase()){document.getElementById("modStatus").textContent="The owner already has owner privileges.";return;}
+ if(isModerator(name)){document.getElementById("modStatus").textContent="That player is already a moderator.";return;}
+ state.moderators.push(name);logAdmin("PROMOTED TO MOD",name,"");persist();
+ document.getElementById("modStatus").textContent=name+" added to the local demo moderator list.";
+}
+function removeModerator(){
+ if(!adminAllowed())return;
+ const name=document.getElementById("moderatorName").value.trim();
+ if(!name){document.getElementById("modStatus").textContent="Enter a username first.";return;}
+ const before=state.moderators.length;
+ state.moderators=state.moderators.filter(n=>n.toLowerCase()!==name.toLowerCase());
+ if(before===state.moderators.length){document.getElementById("modStatus").textContent="That player is not on the local moderator list.";return;}
+ logAdmin("MODERATOR REMOVED",name,"");persist();
+ document.getElementById("modStatus").textContent="Removed "+name+" from the local demo moderator list.";
+}
+function clearAdminLog(){
+ if(!adminAllowed())return;
+ if(!confirm("Clear the local admin activity log?"))return;
+ state.adminLog=[];persist();renderAdminLists();
+}
+function renderAdminLists(){
+ const banned=document.getElementById("bannedList");
+ const mods=document.getElementById("moderatorList");
+ const log=document.getElementById("adminLog");
+ if(!banned||!mods||!log)return;
+ banned.innerHTML=state.bannedPlayers.map(n=>`<div class="item-row"><span>🚫 ${esc(n)}</span><span class="pill">BANNED IN DEMO</span></div>`).join("")||'<div class="empty">No players on the local ban list.</div>';
+ mods.innerHTML=state.moderators.map(n=>`<div class="item-row"><span>🛡️ ${esc(n)}</span><span class="mod-badge">MODERATOR</span></div>`).join("")||'<div class="empty">No moderators assigned.</div>';
+ log.innerHTML=state.adminLog.map(a=>`<div class="item-row"><div style="min-width:0"><strong>${esc(a.action)} · ${esc(a.player)}</strong><div class="muted">${esc(a.reason||"No reason supplied")} · ${esc(a.at)}</div></div></div>`).join("")||'<div class="empty">No admin actions recorded.</div>';
+}
 function renderOwner(){
- document.getElementById("ownerStatus").textContent=OWNER_AUTH_READY?"Owner access must still be confirmed by the connected server.":"Owner account verification is not connected. Owner powers remain disabled.";
+ const status=document.getElementById("ownerStatus");
+ status.textContent=isOwner()?"Owner username matched. Local demo perks are active; this is not secure authentication.":"Owner demo perks are inactive. Set your profile display name to "+OWNER_USERNAME+" to preview them.";
+ renderAdminLists();
 }
 function saveProfile(){
  state.username=(document.getElementById("username").value.trim().slice(0,20)||"Flexer");
- persist();render();
+ persist();render();renderShop();renderCollection();renderOwner();renderLeaderboard();
  document.getElementById("profileStatus").textContent="Profile saved in this browser.";
 }
 function joinGlobalQueue(){
@@ -526,6 +654,7 @@ renderShop();
 renderCollection();
 renderLeaderboard();
 renderOwner();
+renderAdminLists();
 updateTimer();
 window.addEventListener("beforeunload",()=>{
  if(cameraStream)cameraStream.getTracks().forEach(t=>t.stop());
