@@ -1,606 +1,537 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080b14">
-<title>FlexifyGPT — The Flex Arena</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b16">
+<title>FlexifyGPT — Show Your Flex</title>
 <style>
-:root {
-  --bg:#080b14;--panel:#111827;--panel2:#19243a;
-  --blue:#5488ff;--purple:#9b6cff;--text:#f4f6ff;
-  --muted:#98a3bb;--border:#293650;--green:#4ce3a2;
-}
+:root{--bg:#080b16;--panel:#101629;--line:#263252;--text:#f5f7ff;--muted:#929db9;--blue:#5478ff;--cyan:#54e2ff;--purple:#a66bff;--green:#5beba8;--gold:#ffda79}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-button:disabled{opacity:.5;cursor:not-allowed}
-header{position:sticky;top:0;z-index:5;background:#080b14ee;backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:15px 4%;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.logo{font-size:23px;font-weight:950;letter-spacing:-1px}.logo span{color:var(--blue)}
-.coins{background:var(--panel2);padding:10px 13px;border-radius:10px;font-weight:bold}
-.layout{display:flex;min-height:calc(100vh - 60px)}
-nav{width:205px;flex-shrink:0;padding:16px 11px;border-right:1px solid var(--border)}
-nav button{width:100%;display:block;text-align:left;color:var(--muted);background:transparent;border:0;padding:12px;border-radius:10px;margin-bottom:5px;font-weight:bold}
-nav button:hover,nav button.active{background:var(--panel2);color:white}
-main{width:100%;max-width:1250px;min-width:0;margin:auto;padding:25px}
-.page{display:none}.page.active{display:block}
-h1{font-size:clamp(30px,5vw,44px);letter-spacing:-1.5px;margin:7px 0 12px}
-h2{margin-top:0}h3{margin-bottom:8px}
-p{color:var(--muted);line-height:1.55}
-.hero{padding:34px;border-radius:22px;border:1px solid #304775;background:radial-gradient(ellipse at top right,#304578 0%,transparent 58%),linear-gradient(130deg,#151f36,#101321);margin-bottom:20px}
-.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:900;color:#9ab9ff}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
-.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:19px;min-width:0}
-.btn{border:0;border-radius:10px;padding:12px 15px;background:var(--blue);color:white;font-weight:800}
-.btn:hover{filter:brightness(1.12)}
-.btn.secondary{background:var(--panel2);border:1px solid var(--border)}
-.btn.green{background:#176c4c}.btn.danger{background:#762b40}
-.btn.small{padding:8px 11px;font-size:12px}
-.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
-.spread{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.stat{font-size:30px;font-weight:900;margin:10px 0}
-.tag{display:inline-block;background:#253656;color:#c4d6ff;padding:6px 9px;border-radius:7px;font-size:11px;font-weight:bold}
-.muted{font-size:13px;color:var(--muted)}
-.field{display:flex;flex-direction:column;gap:7px;margin:13px 0}
-.field label{font-size:13px;color:#d2d9e8;font-weight:bold}
-input,select,textarea{width:100%;min-width:0;background:#090e19;border:1px solid var(--border);border-radius:9px;padding:12px;color:white}
-textarea{min-height:90px;resize:vertical}
-.progress{height:7px;background:#29344b;border-radius:8px;overflow:hidden;margin:12px 0}
-.progress div{height:100%;background:linear-gradient(90deg,var(--blue),var(--purple));width:0%;transition:width .2s}
-.camera{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#05070c;border:1px solid var(--border);border-radius:12px}
-.timer{font-size:44px;font-weight:950;color:#9cbaff}.timer.warning{color:#ff7979}
-.art{height:85px;border-radius:12px;background:linear-gradient(135deg,#243453,#171a2a);display:grid;place-items:center;font-size:38px}
-.notice{background:#17233a;border-radius:10px;padding:12px;color:#c6d7ff;font-size:13px;line-height:1.6}
-.message{color:var(--green);font-size:13px;line-height:1.5}
-table{border-collapse:collapse;width:100%}
-th,td{text-align:left;padding:11px 7px;border-bottom:1px solid var(--border);font-size:13px}
-th{color:var(--muted)}
-footer{text-align:center;color:var(--muted);padding:28px;font-size:12px}
-@media(max-width:850px){
- .layout{display:block}
- nav{width:100%;display:flex;overflow-x:auto;gap:5px;padding:9px;border-right:0;border-bottom:1px solid var(--border)}
- nav button{white-space:nowrap;width:auto;flex-shrink:0;margin:0;padding:10px}
- main{padding:16px}
- .hero{padding:23px}
-}
-@media(max-width:520px){
- .grid,.two{grid-template-columns:1fr}
- header{padding:12px}
- .logo{font-size:20px}
- .coins{font-size:12px;padding:8px}
- main{padding:12px}
- .timer{font-size:36px}
-}
+body{margin:0;background:radial-gradient(ellipse at top,#172448,#080b16 55%);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif;min-height:100vh}
+button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}
+.topbar{height:68px;padding:0 4%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12;background:#080b16eF;position:sticky;top:0;z-index:5;backdrop-filter:blur(14px)}
+.brand{font-size:23px;font-weight:950;letter-spacing:-1px}.brand span{color:var(--cyan)}
+.coins{border:1px solid #f4ca6544;background:#f4ca6510;padding:9px 13px;border-radius:12px;color:var(--gold);font-weight:850}
+.layout{display:grid;grid-template-columns:205px minmax(0,1fr);max-width:1550px;margin:auto;min-height:calc(100vh - 68px)}
+.sidebar{padding:18px 12px;border-right:1px solid #ffffff10}
+.nav-label{color:#697694;font-size:10px;font-weight:900;letter-spacing:2px;padding:8px}
+.navbtn{width:100%;border:1px solid transparent;background:transparent;color:#aab5d1;padding:11px;border-radius:11px;text-align:left;margin:3px 0;display:flex;align-items:center;gap:10px;font-weight:750}
+.navbtn:hover,.navbtn.active{background:#5478ff20;border-color:#5478ff50;color:white}
+.main{padding:26px clamp(14px,3vw,40px);min-width:0}
+.page{display:none}.page.active{display:block;animation:appear .2s ease}
+@keyframes appear{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+h1{font-size:clamp(28px,4vw,43px);letter-spacing:-1.5px;line-height:1.1;margin:12px 0}
+h2{font-size:22px;letter-spacing:-.5px;margin:0 0 9px}h3{font-size:16px;margin:0 0 8px}
+p{color:var(--muted);line-height:1.6}
+.eyebrow{color:var(--cyan);font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase}
+.hero{position:relative;overflow:hidden;border:1px solid #5478ff60;border-radius:23px;padding:clamp(24px,5vw,50px);background:linear-gradient(120deg,#192952,#121a35 55%,#21183b);margin-bottom:20px}
+.hero:after{content:"FG";position:absolute;right:5%;top:5%;font-size:clamp(100px,20vw,210px);font-weight:1000;color:#ffffff07;pointer-events:none}
+.hero p{max-width:600px}
+.btn{border:1px solid var(--line);background:#19213a;color:white;padding:10px 14px;border-radius:10px;font-weight:800;transition:.15s}
+.btn:hover{filter:brightness(1.17);transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(110deg,var(--blue),#7557ef);border-color:transparent}
+.btn.gold{background:linear-gradient(110deg,#947126,#f3cb6c);color:#18120a;border:0}
+.btnrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:16px 0}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{background:linear-gradient(150deg,#121a2d,#0e1425);border:1px solid var(--line);border-radius:16px;padding:18px;min-width:0}
+.stat{font-size:27px;font-weight:950;margin:8px 0 3px}
+.muted{color:var(--muted);font-size:12px;line-height:1.6}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:25px 0 10px}
+.pill{display:inline-flex;align-items:center;gap:5px;border:1px solid #ffffff16;background:#ffffff07;color:#c7d2ed;border-radius:100px;padding:5px 9px;font-size:10px;font-weight:850}
+.green{color:var(--green)!important;border-color:#5beba844!important}.purple{color:#cba6ff!important;border-color:#a66bff44!important}.goldtext{color:var(--gold)!important}
+.field{width:100%;border:1px solid var(--line);border-radius:10px;background:#080e1c;color:white;padding:11px;margin:7px 0 13px}
+label{font-size:12px;color:#b9c5e1;font-weight:800;display:block}
+.notice{border:1px solid #ffda7930;background:#ffda7909;border-radius:11px;padding:12px;color:#e8d8a5;font-size:12px;line-height:1.65;margin:13px 0}
+.info{border:1px solid #54e2ff30;background:#54e2ff08;border-radius:11px;padding:12px;color:#b7eaff;font-size:12px;line-height:1.65;margin:13px 0}
+.item-row{display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid #ffffff0d;padding:12px 0}
+.item-row:last-child{border-bottom:0}
+.bigicon{font-size:33px;margin-bottom:10px}
+.progress{height:7px;background:#252f49;border-radius:20px;overflow:hidden}.progress div{height:100%;background:linear-gradient(90deg,var(--cyan),var(--blue));transition:width .2s}
+.status{font-size:12px;color:var(--muted);margin-top:9px;min-height:16px}
+.avatar{width:72px;height:72px;border-radius:50%;background:#182341;display:grid;place-items:center;font-size:31px;position:relative;border:4px solid #526a99;flex-shrink:0}
+.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.avatar-banner{height:100px;border:1px solid #ffffff22;border-radius:12px;background:linear-gradient(120deg,#182c62,#583b89,#112e45);margin-bottom:-35px}
+.profile-top{display:flex;gap:16px;align-items:end;margin:0 0 18px;padding:0 12px}
+.cosmetic-preview{height:100px;border-radius:12px;display:grid;place-items:center;background:radial-gradient(circle,#283c70,#11182b);border:1px solid #ffffff14;font-size:36px}
+.shop-card{display:flex;flex-direction:column;gap:9px}
+.shop-card .btn{margin-top:auto}
+.shop-price{font-weight:900;color:var(--gold)}
+.shop-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.scroll-list{max-height:70vh;overflow-y:auto;border:1px solid var(--line);border-radius:13px;padding:0 14px;scrollbar-color:#465a94 #0c1120;scrollbar-width:thin}
+.rank{width:35px;height:35px;border-radius:9px;background:#5478ff22;display:grid;place-items:center;font-weight:900;flex-shrink:0}
+.badge-check{display:inline-flex;vertical-align:middle;color:#48a9ff;font-size:19px;font-weight:950;text-shadow:0 0 12px #48a9ff55}
+.video-box{aspect-ratio:4/3;background:#070b14;border:1px solid #283452;border-radius:13px;overflow:hidden;display:grid;place-items:center;text-align:center;color:#7e8baa}
+.video-box video{width:100%;height:100%;object-fit:cover}
+.timer{font-size:60px;font-weight:1000;text-align:center;margin:12px}
+.empty{text-align:center;padding:24px;color:var(--muted)}
+.footer{text-align:center;padding:24px 0 8px;color:#64708d;font-size:11px}
+.mobile-nav{display:none}
+@media(max-width:900px){.layout{grid-template-columns:160px minmax(0,1fr)}.main{padding:20px 14px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.topbar{height:60px;padding:0 12px}.brand{font-size:20px}.layout{display:block}.sidebar{display:none}.main{padding:15px 12px 82px}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:10;background:#0b1020f5;border-top:1px solid #ffffff18;overflow-x:auto;padding:6px 4px max(6px,env(safe-area-inset-bottom));gap:3px}.mobile-nav .navbtn{flex:0 0 auto;width:auto;display:flex;flex-direction:column;gap:3px;font-size:9px;padding:7px 9px;margin:0;text-align:center}.navbtn .navicon{font-size:16px}.grid,.grid.two{grid-template-columns:1fr}.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding:23px 17px}.card{padding:15px}.timer{font-size:50px}}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="logo">Flexify<span>GPT</span></div>
-  <div class="coins">🪙 <span id="coins">500</span></div>
+<header class="topbar">
+  <div class="brand">FLEXIFY<span>GPT</span></div>
+  <div class="coins">🪙 <span id="coinCount">100</span></div>
 </header>
-
 <div class="layout">
-<nav>
-  <button class="active" data-page="home">⌂ Home</button>
-  <button data-page="battle">⚔ Global Battle</button>
-  <button data-page="matchmaking">🎯 Matchmaking</button>
-  <button data-page="leaderboard">🏆 Leaderboard</button>
-  <button data-page="titles">🎖 Titles</button>
-  <button data-page="shop">🛍 Flex Shop</button>
-  <button data-page="profile">👤 Profile</button>
-  <button data-page="socials">🔗 Socials</button>
-</nav>
+<aside class="sidebar" id="sideNav"></aside>
+<main class="main">
 
-<main>
 <section class="page active" id="home">
-  <div class="hero">
-    <div class="eyebrow">The Flex Arena</div>
-    <h1>Welcome to FlexifyGPT.</h1>
-    <p>Show your flex. Challenge other players. Earn XP, unlock cosmetics, and climb the rankings.</p>
-    <div class="row">
-      <button class="btn" onclick="showPage('battle')">Enter Global Battle →</button>
-      <button class="btn secondary" onclick="showPage('matchmaking')">Private Rooms</button>
-    </div>
-  </div>
-  <div class="grid">
-    <div class="card"><div class="muted">YOUR RATING</div><div class="stat" id="homeRating">1000</div><span class="tag">Starting Rating</span></div>
-    <div class="card"><div class="muted">YOUR LEVEL</div><div class="stat" id="homeLevel">1</div><div class="progress"><div id="xpBar"></div></div><div class="muted" id="xpText">0 / 100 XP</div></div>
-    <div class="card"><div class="muted">ROUNDS PLAYED</div><div class="stat" id="homeRounds">0</div><span class="tag">Your progress</span></div>
-  </div>
-  <h2 style="margin-top:28px">Choose your battle</h2>
-  <div class="two">
-    <div class="card"><h3>🌎 Global Battles</h3><p>Join public matchmaking to find an opponent from anywhere.</p><button class="btn" onclick="showPage('battle')">Global Battle</button></div>
-    <div class="card"><h3>🔒 Private Rooms</h3><p>Create a private room or enter a friend's room code.</p><button class="btn secondary" onclick="showPage('matchmaking')">Private Rooms</button></div>
-  </div>
-  <p class="notice">FlexifyGPT prototype: shared matchmaking and AI item valuation need backend services. This browser version does not pretend those services are already connected.</p>
+ <div class="hero">
+  <div class="eyebrow">Your flex. Your level. Your legacy.</div>
+  <h1>WELCOME TO<br>THE FLEX ARENA.</h1>
+  <p>Show off your rarest items, collect cosmetics, challenge players, and climb all the way to level 999.</p>
+  <div class="btnrow"><button class="btn primary" onclick="showPage('battle')">⚔️ Global Battle</button><button class="btn" onclick="showPage('shop')">🛍️ Explore Flex Shop</button></div>
+ </div>
+ <div class="grid">
+  <div class="card"><div class="muted">YOUR LEVEL</div><div class="stat" id="homeLevel">1</div><div id="homeTitle" class="muted">Rookie</div></div>
+  <div class="card"><div class="muted">YOUR COINS</div><div class="stat" id="homeCoins">100</div><div class="muted">Spend them in the Flex Shop</div></div>
+  <div class="card"><div class="muted">BATTLES WON</div><div class="stat" id="homeWins">0</div><div class="muted">Build your reputation</div></div>
+ </div>
+ <div class="sectionhead"><h2>Your progression</h2><span class="pill goldtext">MAX LEVEL 999</span></div>
+ <div class="card"><div class="item-row"><div><strong id="progressTitle">Rookie</strong><div class="muted" id="progressText">0 / 100 XP</div></div><strong id="progressPercent">0%</strong></div><div class="progress"><div id="xpBar" style="width:0%"></div></div><div class="btnrow"><button class="btn" onclick="showPage('titles')">View level titles</button><button class="btn" onclick="showPage('profile')">View profile</button></div></div>
+ <div class="grid two">
+  <div class="card"><div class="bigicon">🌎</div><h3>Global Battles</h3><p class="muted">Public matchmaking has no fixed 50-player cap.</p><button class="btn primary" onclick="showPage('battle')">Enter Global</button></div>
+  <div class="card"><div class="bigicon">🔐</div><h3>Private Rooms</h3><p class="muted">Each private room queue has a maximum of 50 waiting players.</p><button class="btn" onclick="showPage('matchmaking')">Open Rooms</button></div>
+ </div>
+ <div class="info">Daily shop rotations are selected using the UTC calendar date. To make purchases and rotations shared across every device, connect a backend.</div>
 </section>
 
 <section class="page" id="battle">
-  <div class="eyebrow">Public Matchmaking</div>
-  <h1>🌎 Global Battle</h1>
-  <p>Public 1v1 battles. Queue capacity: 50 players.</p>
-  <div class="two">
-    <div class="card">
-      <h2>Find an Opponent</h2>
-      <div class="stat" id="queueCount">0 / 50</div>
-      <div class="progress"><div id="queueBar"></div></div>
-      <p id="queueStatus">Not in the global queue.</p>
-      <button class="btn" id="queueButton" onclick="joinGlobalQueue()">Join Global Queue</button>
-      <button class="btn secondary" onclick="leaveGlobalQueue()" style="margin-top:8px">Leave Queue</button>
-      <p class="muted">Global matchmaking requires a shared server to match players on different devices.</p>
-    </div>
-    <div class="card">
-      <h2>Battle Rules</h2>
-      <div class="spread"><span>Round duration</span><strong>15 seconds</strong></div>
-      <div class="spread" style="margin-top:13px"><span>Match format</span><strong>1v1</strong></div>
-      <div class="spread" style="margin-top:13px"><span>Queue capacity</span><strong>50 players</strong></div>
-      <div class="spread" style="margin-top:13px"><span>Voice chat</span><strong>When connected</strong></div>
-    </div>
-  </div>
-  <div class="two" style="margin-top:16px">
-    <div class="card">
-      <h2>📹 You</h2>
-      <video id="camera" class="camera" autoplay muted playsinline></video>
-      <p id="cameraStatus" class="muted">Camera is off.</p>
-    </div>
-    <div class="card">
-      <h2>👥 Opponent</h2>
-      <video id="opponentCamera" class="camera" autoplay playsinline></video>
-      <p id="opponentStatus" class="muted">Waiting for an opponent...</p>
-    </div>
-  </div>
-  <div class="card" style="margin-top:16px">
-    <div class="spread">
-      <div><div class="muted">ROUND TIMER</div><div id="timer" class="timer">15s</div></div>
-      <span class="tag">15-SECOND ROUND</span>
-    </div>
-    <div class="progress"><div id="timerBar"></div></div>
-    <div class="row">
-      <button class="btn" id="startButton" onclick="startRound()">Start Battle</button>
-      <button class="btn secondary" id="muteButton" onclick="toggleMute()" disabled>🎙️ Mute Mic</button>
-      <button class="btn secondary" onclick="disconnectCall()">Disconnect</button>
-    </div>
-    <p id="roundStatus">Join a real match before starting a battle.</p>
-    <div id="battleMessage" class="message"></div>
-  </div>
-  <div class="card" style="margin-top:16px">
-    <h2>🤖 AI Item Analysis</h2>
-    <p id="aiStatus">AI judging is not connected yet. Once configured, it can analyze submitted item images and estimate their values.</p>
-    <div class="notice">An AI service and secure backend are needed to analyze images and produce meaningful estimates. This page does not invent AI results.</div>
-  </div>
-  <div class="card" id="resultCard" style="display:none;margin-top:16px">
-    <div class="eyebrow">Round Complete</div>
-    <h2 id="resultTitle">Time's up!</h2>
-    <p id="resultText"></p>
-    <button class="btn" onclick="rematch()">↻ Rematch</button>
-  </div>
+ <div class="eyebrow">Public matchmaking</div><h1>GLOBAL BATTLES 🌎</h1><p>Find an opponent and show what your flex is worth.</p>
+ <div class="grid two">
+  <div class="card"><span class="pill green">PUBLIC QUEUE</span><h2 style="margin-top:13px">Open matchmaking</h2><p class="muted">No fixed 50-player limit. Live matchmaking requires a server.</p><div class="stat">∞</div><div class="muted">No fixed queue cap</div><div class="btnrow"><button class="btn primary" id="globalQueueBtn" onclick="joinGlobalQueue()">Join Global Queue</button><button class="btn" onclick="leaveGlobalQueue()">Leave</button></div><div class="status" id="globalStatus">Backend not connected.</div></div>
+  <div class="card"><span class="pill purple">ROUND SETTINGS</span><h2 style="margin-top:13px">1v1 Flex Battle</h2><div class="item-row"><span class="muted">Round timer</span><strong>15 seconds</strong></div><div class="item-row"><span class="muted">Match format</span><strong>1 vs 1</strong></div><div class="item-row"><span class="muted">AI value analysis</span><strong>Needs API</strong></div></div>
+ </div>
+ <div class="sectionhead"><h2>Battle practice</h2><span class="pill">LOCAL DEMO</span></div>
+ <div class="grid two">
+  <div class="card"><div class="video-box" id="myVideoBox"><div><div style="font-size:34px">📷</div><strong>Your camera</strong><p class="muted">Local preview</p></div></div><video id="myVideo" autoplay playsinline muted style="display:none;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:13px"></video><div class="btnrow"><button class="btn" onclick="toggleCamera()" id="cameraBtn">📷 Turn On Camera</button><button class="btn" onclick="toggleMic()" id="muteBtn">🎙️ Mic Off</button></div><div id="cameraStatus" class="status">Your camera preview is private to this device.</div></div>
+  <div class="card"><div class="video-box"><div><div style="font-size:34px">👤</div><strong>Opponent</strong><p class="muted">Waiting for a matched player</p></div></div><p class="muted">Opponent video and voice require live matchmaking and signaling.</p></div>
+ </div>
+ <div class="card"><div class="eyebrow">15-second practice timer</div><div class="timer"><span id="timerNum">15</span><span style="font-size:14px"> seconds</span></div><div class="progress"><div id="timerBar"></div></div><div class="btnrow"><button class="btn primary" id="startRoundBtn" onclick="startRound()">▶ Start round</button></div><div id="timerStatus" class="status">Practice timer only.</div></div>
+ <div class="notice">Only share what you are comfortable showing. Never reveal your address, school, passwords, or other private information on camera.</div>
 </section>
 
 <section class="page" id="matchmaking">
-  <div class="eyebrow">Play Your Way</div>
-  <h1>Matchmaking</h1>
-  <p>Global matchmaking is public. Private rooms are for people you invite.</p>
-  <div class="two">
-    <div class="card">
-      <h2>🌎 Global 1v1 Queue</h2>
-      <div class="stat">50 <span class="muted">player limit</span></div>
-      <p>Queue up to find a random opponent.</p>
-      <button class="btn" onclick="showPage('battle')">Open Global Battle</button>
-      <p class="muted">Real cross-device matching will activate after a matchmaking backend is connected.</p>
-    </div>
-    <div class="card">
-      <h2>🔒 Private Room</h2>
-      <p>Create a room code to share with a friend, or enter a code from someone else.</p>
-      <button class="btn" onclick="createPrivateRoom()">Create Room Code</button>
-      <div class="field"><label for="privateCode">Room Code / Opponent Peer ID</label><input id="privateCode" maxlength="100" placeholder="Enter the code"></div>
-      <div class="row">
-        <button class="btn secondary" onclick="joinPrivateRoom()">Join Room</button>
-        <button class="btn secondary" onclick="copyRoomCode()">Copy My Code</button>
-      </div>
-      <p id="privateStatus" class="muted">No private room connected.</p>
-      <p class="muted">This prototype uses a direct peer connection. A production private-room service should validate room membership and use secure room codes.</p>
-    </div>
-  </div>
+ <div class="eyebrow">Play with your people</div><h1>MATCHMAKING</h1>
+ <div class="grid two">
+  <div class="card"><div class="bigicon">🌎</div><h2>Global Queue</h2><p>No fixed queue cap. The server will pair waiting players into 1v1s.</p><span class="pill green">NO FIXED CAP</span><div class="btnrow"><button class="btn primary" onclick="showPage('battle')">Open Global Battle</button></div></div>
+  <div class="card"><div class="bigicon">🔒</div><h2>Private Rooms</h2><p>Enter a room code. Each room can have up to 50 waiting players in its queue.</p><span class="pill purple">50 WAITING MAX PER ROOM</span><label for="roomCode" style="margin-top:14px">Room code</label><input id="roomCode" class="field" maxlength="24" placeholder="Enter room code"><div class="btnrow"><button class="btn primary" onclick="createPrivateRoom()">Create Room</button><button class="btn" onclick="joinPrivateRoom()">Join Room</button></div><div class="status" id="roomStatus">Demo only until a backend is connected.</div></div>
+ </div>
+ <div class="card"><h3>Private room queue rules</h3><div class="item-row"><span>Create or enter a room code</span><span>🔑</span></div><div class="item-row"><span>Server counts waiting players</span><span>👥</span></div><div class="item-row"><span>Reject joins when the queue reaches 50</span><span>🛡️</span></div><div class="item-row"><span>Pair two players into a 1v1</span><span>⚔️</span></div><div class="notice">This interface does not enforce a real shared queue limit. Server-side validation is required.</div></div>
 </section>
 
 <section class="page" id="leaderboard">
-  <div class="eyebrow">The Rankings</div><h1>Leaderboard</h1>
-  <div class="card">
-    <div class="spread"><h2>Top Flexers</h2><span class="tag">SAMPLE DATA</span></div>
-    <table><thead><tr><th>#</th><th>Player</th><th>Rating</th><th>Title</th></tr></thead><tbody id="leaderRows"></tbody></table>
-    <p id="myRank" class="muted"></p>
-    <p class="muted">Other entries are sample players, not a live global ranking.</p>
-  </div>
+ <div class="eyebrow">The top flexers</div><h1>LEADERBOARD 🏆</h1><p>Scroll through at least 450 rank positions. Empty positions are placeholders, not fake players.</p>
+ <div class="card"><div class="grid two"><div><label for="leaderSort">Sort category</label><select class="field" id="leaderSort" onchange="renderLeaderboard()"><option value="level">Level</option><option value="wins">Wins</option><option value="xp">XP</option></select></div><div><label for="leaderSearch">Find a player</label><input class="field" id="leaderSearch" placeholder="Search display names" oninput="renderLeaderboard()"></div></div><div class="info">Your local profile: <strong id="leaderLocal">Flexer</strong>. Global player rankings need accounts and a shared database.</div><div class="scroll-list" id="leaderList"></div></div>
 </section>
 
 <section class="page" id="titles">
-  <div class="eyebrow">Your Status</div><h1>Titles & Ranks</h1>
-  <h2>🏆 Special Shop Titles</h2>
-  <p>These titles are separate from level-based titles.</p>
-  <div class="grid" id="specialTitles"></div>
-  <h2 style="margin-top:28px">📈 Level Titles</h2>
-  <div class="grid" id="levelTitles"></div>
+ <div class="eyebrow">Earn your reputation</div><h1>LEVEL TITLES 🎖️</h1><p>Maximum level 999, with 200 unique title unlocks spread across the progression. Shop titles are separate.</p>
+ <div class="grid two"><div class="card"><div class="stat">999</div><div class="muted">Maximum level</div></div><div class="card"><div class="stat">200</div><div class="muted">Unique progression titles</div></div></div>
+ <div class="card"><label for="titleSearch">Find a title or level</label><input id="titleSearch" class="field" placeholder="Search titles..." oninput="renderLevels()"><div id="levelTitles" class="scroll-list" style="max-height:70vh"></div></div>
 </section>
 
 <section class="page" id="shop">
-  <div class="eyebrow">Customize Your Profile</div><h1>Flex Shop</h1>
-  <p>Unlock cosmetics using coins earned in the demo.</p>
-  <div class="grid" id="shopItems"></div>
-  <p id="shopMessage" class="message"></p>
+ <div class="eyebrow">Collect your style</div><h1>FLEX SHOP 🛍️</h1><p>Avatar borders, profile banners, and exclusive shop titles.</p>
+ <div class="grid two">
+  <div class="card"><div class="stat">6,000+</div><div class="muted">Unique cosmetic catalog items</div></div>
+  <div class="card"><div class="stat">30</div><div class="muted">Items in each daily rotation</div></div>
+ </div>
+ <div class="card"><div class="item-row"><div><strong>Today's rotation</strong><div class="muted" id="rotationDate">UTC daily selection</div></div><span class="pill green">30 ITEMS</span></div><div class="grid two"><div><label for="shopType">Cosmetic type</label><select id="shopType" class="field" onchange="renderShop()"><option value="all">All cosmetics</option><option value="border">Avatar borders</option><option value="banner">Profile banners</option><option value="title">Shop titles</option></select></div><div><label for="shopSearch">Search cosmetics</label><input id="shopSearch" class="field" placeholder="Search today's items" oninput="renderShop()"></div></div><div id="shopItems" class="shop-grid"></div><div class="btnrow"><button class="btn" onclick="showPage('collection')">View my collection</button></div></div>
+ <div class="info">The catalog generates 6,000 unique cosmetic records. Images and custom artwork can be added later. Rotation is date-based; purchases are local until cloud storage is connected.</div>
+</section>
+
+<section class="page" id="collection">
+ <div class="eyebrow">Your personal inventory</div><h1>MY COLLECTION ✨</h1><p>Equip one avatar border, one banner, and one shop title.</p>
+ <div class="card"><div class="avatar-banner" id="profileBannerPreview"></div><div class="profile-top"><div class="avatar" id="collectionAvatar">👾</div><div><strong id="collectionName">Flexer</strong><div id="collectionBadges" class="muted">Player profile</div></div></div><div class="item-row"><span>Equipped border</span><strong id="equippedBorderName">Default</strong></div><div class="item-row"><span>Equipped banner</span><strong id="equippedBannerName">Default</strong></div><div class="item-row"><span>Equipped shop title</span><strong id="equippedTitleName">None</strong></div></div>
+ <div class="sectionhead"><h2>Owned cosmetics</h2><span class="pill" id="ownedCount">0 ITEMS</span></div><div class="card"><label for="collectionType">Filter inventory</label><select id="collectionType" class="field" onchange="renderCollection()"><option value="all">Everything</option><option value="border">Avatar borders</option><option value="banner">Profile banners</option><option value="title">Shop titles</option></select><div id="collectionItems" class="shop-grid"></div></div>
 </section>
 
 <section class="page" id="profile">
-  <div class="eyebrow">Your Account</div><h1>Profile</h1>
-  <div class="two">
-    <div class="card">
-      <h2>Player Settings</h2>
-      <div class="field"><label for="username">Display Name</label><input id="username" maxlength="24" placeholder="Your display name"></div>
-      <div class="field"><label for="country">Country</label>
-        <select id="country"><option>United States</option><option>Canada</option><option>United Kingdom</option><option>Australia</option><option>France</option><option>Germany</option><option>Brazil</option><option>Other</option></select>
-      </div>
-      <button class="btn" onclick="saveProfile()">Save Profile</button>
-      <p id="profileMessage" class="message"></p>
-    </div>
-    <div class="card">
-      <h2>Your Stats</h2>
-      <div class="spread"><span class="muted">Rating</span><strong id="profileRating">1000</strong></div>
-      <div class="spread" style="margin-top:13px"><span class="muted">Level</span><strong id="profileLevel">1</strong></div>
-      <div class="spread" style="margin-top:13px"><span class="muted">Rounds played</span><strong id="profileRounds">0</strong></div>
-      <div class="spread" style="margin-top:13px"><span class="muted">Country</span><strong id="profileCountry">United States</strong></div>
-      <h3>Inventory</h3><div id="inventory" class="muted">No cosmetics owned yet.</div>
-    </div>
-  </div>
-  <div class="card" style="margin-top:16px">
-    <h2>Account Security</h2>
-    <p>Secure accounts and password changes require an authentication backend.</p>
-    <div class="field"><label>Change Password</label><input disabled placeholder="Requires secure account system"></div>
-    <button class="btn secondary" disabled>Change Password</button>
-  </div>
+ <div class="eyebrow">Your player card</div><h1>YOUR PROFILE</h1>
+ <div class="card"><div class="avatar-banner" id="mainProfileBanner"></div><div class="profile-top"><div class="avatar" id="profileAvatar">👾</div><div><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><strong id="profileDisplayName">Flexer</strong><span id="verifiedBadge" class="badge-check" style="display:none" title="Verified FlexifyGPT owner">✓</span></div><div id="profileBadges" class="muted">Player</div></div></div><label for="username">Display name</label><input id="username" class="field" maxlength="20" placeholder="Choose a display name"><button class="btn primary" onclick="saveProfile()">Save Profile</button><div class="status" id="profileStatus"></div><div class="item-row"><span>Level</span><strong id="profileLevel">1</strong></div><div class="item-row"><span>Level title</span><strong id="profileTitle">Rookie</strong></div><div class="item-row"><span>Shop title</span><strong id="profileShopTitle">None equipped</strong></div><div class="item-row"><span>XP</span><strong id="profileXP">0</strong></div><div class="item-row"><span>Wins</span><strong id="profileWins">0</strong></div><div class="btnrow"><button class="btn" onclick="showPage('collection')">Customize Profile</button><button class="btn" onclick="showPage('titles')">View Titles</button></div></div>
+ <div class="notice">Profile data is stored in this browser. Cross-device accounts need authentication and cloud storage.</div>
+</section>
+
+<section class="page" id="owner">
+ <div class="eyebrow">Restricted controls</div><h1>OWNER CONTROL PANEL 👑</h1>
+ <div class="card"><div class="bigicon">👑</div><span class="pill goldtext">OWNER-ONLY FEATURES</span><h2 style="margin-top:12px">Owner privileges</h2><p>Exclusive OWNER title, blue verification badge, unlimited coin spending, all cosmetics for testing, and management controls for the shop.</p><div class="item-row"><span>Owner title</span><strong>OWNER</strong></div><div class="item-row"><span>Verified owner badge</span><span class="badge-check">✓</span></div><div class="item-row"><span>Coin spending</span><strong>Unlimited</strong></div><div class="item-row"><span>Cosmetic access</span><strong>All catalog items</strong></div><div class="item-row"><span>Shop rotation</span><strong>Management access</strong></div><div class="notice">Owner authentication is NOT configured in this HTML. The panel is a preview until a secure backend identifies your account and enforces these privileges on the server. Do not deploy owner powers based only on a browser variable.</div><div class="status" id="ownerStatus">Owner account verification is not connected.</div></div>
 </section>
 
 <section class="page" id="socials">
-  <div class="eyebrow">Stay Connected</div><h1>Socials & Support</h1>
-  <div class="grid">
-    <div class="card">
-      <h2>💡 Suggestions</h2><p>Share ideas for improving FlexifyGPT.</p>
-      <div class="field"><label for="suggestion">Suggestion</label><textarea id="suggestion" maxlength="1000"></textarea></div>
-      <button class="btn" onclick="saveMessage('suggestion','flexifySuggestions','suggestionMessage')">Submit Suggestion</button>
-      <p id="suggestionMessage" class="message"></p>
-    </div>
-    <div class="card">
-      <h2>🛡 Report a Problem</h2><p>Report an issue with the demo.</p>
-      <div class="field"><label for="report">Report details</label><textarea id="report" maxlength="1000"></textarea></div>
-      <button class="btn secondary" onclick="saveMessage('report','flexifyReports','reportMessage')">Submit Report</button>
-      <p id="reportMessage" class="message"></p>
-      <p class="muted">Reports are saved locally and are not sent to an administrator.</p>
-    </div>
-    <div class="card">
-      <h2>🌐 Website</h2><p>FlexifyGPT — The Flex Arena.</p>
-      <button class="btn secondary" onclick="copyText('FlexifyGPT')">Copy Website Name</button>
-    </div>
-  </div>
+ <div class="eyebrow">Connect with the community</div><h1>SOCIALS 💬</h1>
+ <div class="grid two">
+  <div class="card"><div class="bigicon">🎵</div><h2>TikTok</h2><label for="tiktokLink">TikTok URL</label><input id="tiktokLink" class="field" placeholder="https://www.tiktok.com/@yourname"><button class="btn" onclick="openSocial('tiktokLink')">Open TikTok</button></div>
+  <div class="card"><div class="bigicon">💬</div><h2>Community</h2><label for="communityLink">Community URL</label><input id="communityLink" class="field" placeholder="https://discord.gg/yourinvite"><button class="btn" onclick="openSocial('communityLink')">Open Community</button></div>
+ </div>
+ <div class="card"><h3>Suggestions & feedback</h3><p class="muted">Saved on this device only; sending suggestions requires a backend.</p><textarea id="suggestion" class="field" maxlength="1000" placeholder="What should we add?"></textarea><button class="btn primary" onclick="saveSuggestion()">Save Suggestion</button><div id="suggestionStatus" class="status"></div></div>
 </section>
+<div class="footer">FLEXIFYGPT • SHOW YOUR FLEX • BUILT FOR THE COMMUNITY</div>
+</main></div>
+<nav class="mobile-nav" id="mobileNav"></nav>
 
-<footer>FlexifyGPT © 2026 · Community prototype · Play fair, flex responsibly.</footer>
-</main>
-</div>
-
-<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>
-const $ = id => document.getElementById(id);
+"use strict";
 
-const defaults = {
-  name:"Flexer",country:"United States",coins:500,rating:1000,
-  xp:0,rounds:0,inventory:[],ownedTitles:[],equippedTitle:"Rookie",
-  equippedCosmetic:""
+/* OWNER SECURITY:
+   Do not grant privileges based on a display name or a client-editable flag.
+   Set up authentication and verify owner permissions on your backend before
+   enabling infinite coins, the owner badge, or privileged admin actions. */
+const OWNER_AUTH_READY = false;
+const OWNER_TITLE = "OWNER";
+const MAX_LEVEL = 999;
+const TITLE_COUNT = 200;
+const COSMETIC_COUNT = 6000;
+const DAILY_ITEMS = 30;
+
+const NAV=[
+ ["home","🏠","Home"],["battle","⚔️","Battle"],["matchmaking","🔐","Matchmaking"],
+ ["leaderboard","🏆","Leaderboard"],["titles","🎖️","Titles"],["shop","🛍️","Flex Shop"],
+ ["collection","✨","Collection"],["profile","👤","Profile"],["owner","👑","Owner"],["socials","💬","Socials"]
+];
+
+const DEFAULT={
+ coins:100,xp:0,wins:0,username:"Flexer",owned:[],
+ equippedBorder:"",equippedBanner:"",equippedTitle:"",
+ suggestion:""
 };
 let state;
-try {
-  state={...defaults,...JSON.parse(localStorage.getItem("flexifyState")||"{}")};
-} catch(e) { state={...defaults}; }
-if(!Array.isArray(state.inventory))state.inventory=[];
-if(!Array.isArray(state.ownedTitles))state.ownedTitles=[];
+try{
+ const old=JSON.parse(localStorage.getItem("flexifygpt_v2")||"{}");
+ state={...DEFAULT,...old};
+ if(!Array.isArray(state.owned))state.owned=[];
+}catch(e){state={...DEFAULT};}
 
-let peer=null,mediaStream=null,activeCall=null;
-let timerInterval=null,seconds=15,roundRunning=false,micMuted=false;
+let cameraStream=null,micStream=null,micOn=false,timerInterval=null,timerRemaining=15;
 
-const cosmetics=[
-["flame","Blue Flame","🔥",100],["aura","Purple Aura","💜",150],
-["diamond","Diamond Flex","💎",250],["crown","Royal Crown","👑",300],
-["bolt","Lightning","⚡",125],["ice","Ice Mode","❄️",175],
-["galaxy","Galaxy","🌌",350],["star","Superstar","⭐",100],
-["skull","Shadow Skull","💀",225],["rose","Crimson Rose","🌹",150],
-["moon","Moonlight","🌙",125],["solar","Solar","☀️",125],
-["robot","Robo Flex","🤖",200],["ghost","Phantom","👻",200],
-["gem","Rare Gem","🔮",275],["money","Money Mode","💸",180],
-["inferno","Inferno","🌋",300],["ocean","Ocean Wave","🌊",175],
-["heart","Heart Glow","💖",125],["power","Power Bolt","🔋",100],
-["comet","Comet","☄️",225],["guardian","Guardian","🛡️",200],
-["trophy","Champion Trophy","🏆",400],["rainbow","Rainbow","🌈",225],
-["wolf","Lone Wolf","🐺",200],["dragon","Dragon","🐉",350],
-["pink","Pink Pulse","🎀",150],["meteor","Meteor","🌠",275],
-["mask","Mystery Mask","🎭",200],["prism","Prism","🔷",250]
+const PREFIXES=[
+ "Rising","Skilled","Elite","Master","Legendary","Mythic","Supreme","Ultimate",
+ "Cosmic","Phantom","Shadow","Royal","Cyber","Infernal","Eternal","Ascendant",
+ "Celestial","Titan","Quantum","Nova"
 ];
-const special=[
-["champion","Flexify Champion","👑",1500],
-["elite","Flexify Elite","💠",900],
-["contender","Flexify Contender","⚔️",500]
+const SUFFIXES=[
+ "Flexer","Champion","Contender","Legend","Warrior","Hunter","Collector",
+ "Vanguard","Striker","Phantom","Overlord","Pioneer","Prodigy","Guardian",
+ "Architect","Commander","Sentinel","Rival","Icon","Ace"
 ];
-const levels=[
-[1,"Rookie"],[3,"Rising Flexer"],[5,"Skilled Flexer"],
-[10,"Elite Flexer"],[20,"Master Flexer"],[35,"Legendary Flexer"],
-[50,"Flexify Legend"]
-];
+const LEVELS=Array.from({length:TITLE_COUNT},(_,i)=>{
+ const level=i===0?1:Math.round(1+i*(MAX_LEVEL-1)/(TITLE_COUNT-1));
+ let name;
+ if(i===0)name="Rookie";
+ else if(i===TITLE_COUNT-1)name="Flexify God";
+ else name=PREFIXES[Math.floor((i-1)/SUFFIXES.length)%PREFIXES.length]+" "+SUFFIXES[(i-1)%SUFFIXES.length];
+ return {level,name,xp:xpForLevel(level)};
+});
 
-function saveState(){
-  try{localStorage.setItem("flexifyState",JSON.stringify(state));}catch(e){}
+function xpForLevel(level){return Math.floor(50*(level-1)+2.5*(level-1)*(level-1));}
+function levelForXP(xp){
+ let lo=1,hi=MAX_LEVEL;
+ while(lo<hi){
+  const mid=Math.ceil((lo+hi)/2);
+  if(xpForLevel(mid)<=xp)lo=mid;else hi=mid-1;
+ }
+ return lo;
 }
-function level(){return 1+Math.floor(state.xp/100);}
-function levelTitle(){
-  let result=levels[0][1];
-  levels.forEach(x=>{if(level()>=x[0])result=x[1];});
-  return result;
+function levelTitle(level){
+ let result=LEVELS[0];
+ for(const t of LEVELS){if(t.level<=level)result=t;else break;}
+ return result;
 }
-function safe(s){
-  return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function persist(){try{localStorage.setItem("flexifygpt_v2",JSON.stringify(state));}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+/* 6,000 generated catalog records: 3 types x 10 themes x 20 designs x 10 variants. */
+const TYPES=["border","banner","title"];
+const THEMES=["Neon","Cyber","Royal","Shadow","Cosmic","Inferno","Frost","Emerald","Void","Aurora"];
+const DESIGNS=["Pulse","Nova","Phantom","Rift","Vortex","Comet","Titan","Echo","Glitch","Orbit","Storm","Prism","Specter","Matrix","Quantum","Solar","Lunar","Apex","Drift","Genesis"];
+const VARIANTS=["I","II","III","IV","V","VI","VII","VIII","IX","X"];
+const TYPE_NAMES={border:"Avatar Border",banner:"Profile Banner",title:"Shop Title"};
+const TYPE_ICONS={border:"⭕",banner:"🏳️",title:"🏷️"};
+const RARITIES=["Common","Uncommon","Rare","Epic","Legendary","Mythic"];
+const RARITY_CLASS={"Common":"","Uncommon":"green","Rare":"purple","Epic":"purple","Legendary":"goldtext","Mythic":"goldtext"};
+const CATALOG=[];
+for(let t=0;t<TYPES.length;t++){
+ for(let th=0;th<THEMES.length;th++){
+  for(let d=0;d<DESIGNS.length;d++){
+   for(let v=0;v<VARIANTS.length;v++){
+    const idx=CATALOG.length;
+    const type=TYPES[t],theme=THEMES[th],design=DESIGNS[d],variant=VARIANTS[v];
+    const rarity=RARITIES[(th+d+v)%RARITIES.length];
+    CATALOG.push({
+     id:"fx-"+String(idx+1).padStart(4,"0"),
+     type,theme,design,variant,
+     name:theme+" "+design+" "+variant,
+     rarity,price:priceForRarity(rarity,type),
+     icon:type==="border"?"⭕":type==="banner"?"🏳️":"🏷️",
+     color:themeColor(th)
+    });
+   }
+  }
+ }
+}
+function priceForRarity(rarity,type){
+ const base={Common:60,Uncommon:100,Rare:175,Epic:300,Legendary:550,Mythic:900}[rarity];
+ return base+(type==="banner"?20:type==="title"?10:0);
+}
+function themeColor(i){
+ return ["#54e2ff","#8c7bff","#ffda79","#a66bff","#53a6ff","#ff647c","#b5dfff","#5beba8","#8d90ff","#ff91d4"][i];
+}
+
+/* Stable, repeatable 30-item UTC daily rotation. */
+function utcDateKey(){
+ const d=new Date();
+ return d.getUTCFullYear()+"-"+String(d.getUTCMonth()+1).padStart(2,"0")+"-"+String(d.getUTCDate()).padStart(2,"0");
+}
+function hashString(s){
+ let h=2166136261;
+ for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}
+ return h>>>0;
+}
+function seededRandom(seed){
+ return function(){
+  seed=(seed+0x6D2B79F5)>>>0;
+  let t=seed;
+  t=Math.imul(t^(t>>>15),t|1);
+  t^=t+Math.imul(t^(t>>>7),t|61);
+  return ((t^(t>>>14))>>>0)/4294967296;
+ };
+}
+function getDailyRotation(){
+ const key=utcDateKey(),random=seededRandom(hashString("FlexifyGPT:"+key));
+ const arr=CATALOG.slice();
+ for(let i=arr.length-1;i>0;i--){
+  const j=Math.floor(random()*(i+1));
+  [arr[i],arr[j]]=[arr[j],arr[i]];
+ }
+ return arr.slice(0,DAILY_ITEMS);
+}
+let dailyRotation=getDailyRotation();
+let currentRotationDate=utcDateKey();
+
+function buildNav(){
+ const make=()=>NAV.map(([id,icon,label])=>
+  `<button class="navbtn ${id==="home"?"active":""}" data-page="${id}" onclick="showPage('${id}')"><span class="navicon">${icon}</span><span>${label}</span></button>`
+ ).join("");
+ document.getElementById("sideNav").innerHTML='<div class="nav-label">ARENA MENU</div>'+make();
+ document.getElementById("mobileNav").innerHTML=make();
 }
 function showPage(id){
-  document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));
-  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
-  if(id==="leaderboard")renderLeaderboard();
-  if(id==="shop")renderShop();
-  if(id==="titles")renderTitles();
-  if(id==="profile")renderProfile();
-  window.scrollTo({top:0,behavior:"smooth"});
+ document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));
+ document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
+ if(id==="titles")renderLevels();
+ if(id==="shop")renderShop();
+ if(id==="collection")renderCollection();
+ if(id==="leaderboard")renderLeaderboard();
+ if(id==="owner")renderOwner();
+ render();
+ window.scrollTo({top:0,behavior:"smooth"});
 }
-document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
-
-function updateUI(){
-  $("coins").textContent=state.coins;
-  $("homeRating").textContent=state.rating;
-  $("homeLevel").textContent=level();
-  $("homeRounds").textContent=state.rounds;
-  $("xpText").textContent=(state.xp%100)+" / 100 XP";
-  $("xpBar").style.width=(state.xp%100)+"%";
-  $("profileRating").textContent=state.rating;
-  $("profileLevel").textContent=level();
-  $("profileRounds").textContent=state.rounds;
-  $("profileCountry").textContent=state.country;
+function render(){
+ const level=levelForXP(state.xp),title=levelTitle(level);
+ const nextLevel=Math.min(MAX_LEVEL,level+1);
+ const currentXP=xpForLevel(level),nextXP=xpForLevel(nextLevel);
+ const pct=level>=MAX_LEVEL?100:Math.max(0,Math.min(100,Math.round((state.xp-currentXP)/Math.max(1,nextXP-currentXP)*100)));
+ document.getElementById("coinCount").textContent=Number.isFinite(state.coins)?state.coins.toLocaleString():"∞";
+ document.getElementById("homeLevel").textContent=level;
+ document.getElementById("homeTitle").textContent=title.name;
+ document.getElementById("homeCoins").textContent=Number.isFinite(state.coins)?state.coins.toLocaleString():"∞";
+ document.getElementById("homeWins").textContent=state.wins;
+ document.getElementById("progressTitle").textContent=title.name;
+ document.getElementById("progressText").textContent=level>=MAX_LEVEL?"Maximum level reached!":(state.xp-currentXP).toLocaleString()+" / "+(nextXP-currentXP).toLocaleString()+" XP to level "+nextLevel;
+ document.getElementById("progressPercent").textContent=pct+"%";
+ document.getElementById("xpBar").style.width=pct+"%";
+ document.getElementById("profileDisplayName").textContent=state.username||"Flexer";
+ document.getElementById("profileLevel").textContent=level+" / "+MAX_LEVEL;
+ document.getElementById("profileTitle").textContent=title.name;
+ document.getElementById("profileShopTitle").textContent=state.equippedTitle||"None equipped";
+ document.getElementById("profileXP").textContent=state.xp.toLocaleString();
+ document.getElementById("profileWins").textContent=state.wins;
+ document.getElementById("username").value=state.username||"";
+ document.getElementById("suggestion").value=state.suggestion||"";
+ document.getElementById("leaderLocal").textContent=state.username||"Flexer";
+ renderProfileCosmetics();
+}
+function renderLevels(){
+ const query=(document.getElementById("titleSearch").value||"").toLowerCase();
+ const unlockedLevel=levelForXP(state.xp);
+ document.getElementById("levelTitles").innerHTML=LEVELS.filter(t=>(t.name+" "+t.level).toLowerCase().includes(query)).map(t=>{
+  const unlocked=unlockedLevel>=t.level;
+  return `<div class="item-row"><div class="rank">${t.level}</div><div style="flex:1"><strong>${esc(t.name)}</strong><div class="muted">${t.xp.toLocaleString()} XP required</div></div><span class="pill ${unlocked?"green":""}">${unlocked?"UNLOCKED":"LOCKED"}</span></div>`;
+ }).join("")||'<div class="empty">No matching titles.</div>';
+}
+function itemCard(item,context){
+ const owned=state.owned.includes(item.id);
+ const equipped=(item.type==="border"&&state.equippedBorder===item.id)||(item.type==="banner"&&state.equippedBanner===item.id)||(item.type==="title"&&state.equippedTitle===item.id);
+ let button="";
+ if(context==="shop"){
+  button=owned?`<button class="btn" onclick="equipItem('${item.id}')">${equipped?"Equipped ✓":"Equip"}</button>`:`<button class="btn primary" onclick="buyItem('${item.id}')">Buy 🪙 ${item.price}</button>`;
+ }else{
+  button=equipped?'<button class="btn" disabled>Equipped ✓</button>':`<button class="btn primary" onclick="equipItem('${item.id}')">Equip</button>`;
+ }
+ return `<div class="card shop-card"><div class="cosmetic-preview" style="border-color:${item.color};box-shadow:inset 0 0 25px ${item.color}22">${item.icon}</div><span class="pill ${RARITY_CLASS[item.rarity]||""}">${item.rarity.toUpperCase()}</span><h3>${esc(item.name)}</h3><div class="muted">${TYPE_NAMES[item.type]} · ${item.id}</div><div class="shop-price">${owned?"Owned":"🪙 "+item.price.toLocaleString()}</div>${button}</div>`;
 }
 function renderShop(){
-  $("shopItems").innerHTML=cosmetics.map(x=>{
-    const owned=state.inventory.includes(x[0]);
-    return `<div class="card"><div class="art">${x[2]}</div><h3>${x[1]}</h3><p class="muted">Profile cosmetic</p><div class="spread"><strong>🪙 ${x[3]}</strong><span class="muted">${owned?"Owned":""}</span></div><button class="btn ${owned?"secondary":""}" style="margin-top:12px" onclick="buyCosmetic('${x[0]}')">${owned?"Equip":"Purchase"}</button></div>`;
-  }).join("");
+ const date=utcDateKey();
+ if(date!==currentRotationDate){currentRotationDate=date;dailyRotation=getDailyRotation();}
+ document.getElementById("rotationDate").textContent=date+" UTC · refreshes at 00:00 UTC";
+ const type=document.getElementById("shopType").value;
+ const query=document.getElementById("shopSearch").value.toLowerCase();
+ const items=dailyRotation.filter(i=>(type==="all"||i.type===type)&&(i.name+" "+i.rarity+" "+TYPE_NAMES[i.type]).toLowerCase().includes(query));
+ document.getElementById("shopItems").innerHTML=items.map(i=>itemCard(i,"shop")).join("")||'<div class="empty">No matching items in today’s rotation.</div>';
 }
-function buyCosmetic(id){
-  const x=cosmetics.find(c=>c[0]===id);if(!x)return;
-  if(state.inventory.includes(id)){state.equippedCosmetic=id;$("shopMessage").textContent="Cosmetic equipped.";saveState();renderShop();renderProfile();return;}
-  if(state.coins<x[3]){$("shopMessage").textContent="Not enough coins. Complete demo rounds to earn more.";return;}
-  state.coins-=x[3];state.inventory.push(id);state.equippedCosmetic=id;
-  $("shopMessage").textContent="Purchase complete!";
-  saveState();updateUI();renderShop();renderProfile();
+function buyItem(id){
+ const item=CATALOG.find(i=>i.id===id);
+ if(!item||state.owned.includes(id))return;
+ if(!dailyRotation.some(i=>i.id===id)){alert("This item is not in today's rotation.");return;}
+ if(state.coins<item.price){alert("You need more coins for this cosmetic.");return;}
+ state.coins-=item.price;state.owned.push(id);persist();render();renderShop();
 }
-function renderTitles(){
-  $("specialTitles").innerHTML=special.map(t=>{
-    const owned=state.ownedTitles.includes(t[0]);
-    return `<div class="card"><div class="art">${t[2]}</div><h3>${t[1]}</h3><p class="muted">Special shop title</p><p>🪙 ${t[3]}</p><button class="btn ${state.equippedTitle===t[1]?"green":"secondary"}" onclick="${owned?`equipSpecial('${t[0]}')`:`buyTitle('${t[0]}')`}">${owned?(state.equippedTitle===t[1]?"Equipped":"Equip Title"):"Purchase Title"}</button></div>`;
-  }).join("");
-  $("levelTitles").innerHTML=levels.map(t=>{
-    const unlocked=level()>=t[0];
-    return `<div class="card"><h3>${t[1]}</h3><span class="tag">LEVEL ${t[0]}</span><p>${unlocked?"Unlocked":`Reach level ${t[0]} to unlock`}</p><button class="btn secondary" ${unlocked?"":"disabled"} onclick="equipLevel('${t[1]}')">${state.equippedTitle===t[1]?"Equipped":"Equip"}</button></div>`;
-  }).join("");
+function equipItem(id){
+ const item=CATALOG.find(i=>i.id===id);
+ if(!item||!state.owned.includes(id))return;
+ if(item.type==="border")state.equippedBorder=id;
+ if(item.type==="banner")state.equippedBanner=id;
+ if(item.type==="title")state.equippedTitle=item.name;
+ persist();render();renderShop();renderCollection();
 }
-function buyTitle(id){
-  const t=special.find(x=>x[0]===id);if(!t)return;
-  if(state.ownedTitles.includes(id))return;
-  if(state.coins<t[3]){alert("Not enough coins.");return;}
-  state.coins-=t[3];state.ownedTitles.push(id);state.equippedTitle=t[1];
-  saveState();updateUI();renderTitles();
+function renderCollection(){
+ const type=document.getElementById("collectionType").value;
+ const items=state.owned.map(id=>CATALOG.find(i=>i.id===id)).filter(Boolean).filter(i=>type==="all"||i.type===type);
+ document.getElementById("ownedCount").textContent=state.owned.length+" ITEMS";
+ document.getElementById("collectionItems").innerHTML=items.map(i=>itemCard(i,"collection")).join("")||'<div class="empty">No cosmetics owned yet. Visit the Flex Shop to collect your first item!</div>';
+ renderProfileCosmetics();
 }
-function equipSpecial(id){
-  const t=special.find(x=>x[0]===id);
-  if(!t||!state.ownedTitles.includes(id))return;
-  state.equippedTitle=t[1];saveState();renderTitles();
-}
-function equipLevel(name){
-  const t=levels.find(x=>x[1]===name);
-  if(!t||level()<t[0])return;
-  state.equippedTitle=name;saveState();renderTitles();
-}
-function renderProfile(){
-  $("username").value=state.name;
-  $("country").value=state.country;
-  const items=state.inventory.map(id=>cosmetics.find(x=>x[0]===id)).filter(Boolean);
-  $("inventory").innerHTML=items.length?items.map(x=>x[2]+" "+x[1]+(state.equippedCosmetic===x[0]?" (Equipped)":"")).join("<br>"):"No cosmetics owned yet.";
-  updateUI();
-}
-function saveProfile(){
-  const name=$("username").value.trim();
-  if(!name){$("profileMessage").textContent="Enter a display name.";return;}
-  state.name=name.slice(0,24);state.country=$("country").value;
-  saveState();updateUI();$("profileMessage").textContent="Profile saved in this browser.";
+function renderProfileCosmetics(){
+ const border=CATALOG.find(i=>i.id===state.equippedBorder);
+ const banner=CATALOG.find(i=>i.id===state.equippedBanner);
+ const title=state.equippedTitle||"None";
+ ["profileAvatar","collectionAvatar"].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el){el.style.borderColor=border?border.color:"#526a99";el.style.boxShadow=border?"0 0 18px "+border.color+"55":"none";el.textContent="👾";}
+ });
+ ["mainProfileBanner","profileBannerPreview"].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el){el.style.background=banner?`linear-gradient(120deg,${banner.color},#11182b,${banner.color})`:"linear-gradient(120deg,#182c62,#583b89,#112e45)";}
+ });
+ document.getElementById("equippedBorderName").textContent=border?border.name:"Default";
+ document.getElementById("equippedBannerName").textContent=banner?banner.name:"Default";
+ document.getElementById("equippedTitleName").textContent=title;
+ document.getElementById("collectionName").textContent=state.username||"Flexer";
+ document.getElementById("collectionBadges").textContent=levelTitle(levelForXP(state.xp)).name+(title!=="None"?" · "+title:"");
+ document.getElementById("profileBadges").textContent=levelTitle(levelForXP(state.xp)).name+(title!=="None"?" · "+title:"");
+ document.getElementById("verifiedBadge").style.display="none";
 }
 function renderLeaderboard(){
-  const bots=[["NovaFlex",1840],["ShadowVex",1775],["PixelKing",1690],["GhostMode",1600],["Vortex",1530],["BlazeX",1460],["CloudNine",1390],["FrostByte",1325],["NightShift",1260],["StarPlayer",1190]];
-  const players=bots.map(x=>({name:x[0],rating:x[1],title:"Flexer"}));
-  players.push({name:state.name,rating:state.rating,title:state.equippedTitle,mine:true});
-  players.sort((a,b)=>b.rating-a.rating);
-  $("leaderRows").innerHTML=players.map((p,i)=>`<tr ${p.mine?'style="background:#192746"':""}><td>${i+1}</td><td>${safe(p.name)}${p.mine?" (You)":""}</td><td>${p.rating}</td><td>${safe(p.title)}</td></tr>`).join("");
-  $("myRank").textContent="Your demo ranking: #"+(players.findIndex(p=>p.mine)+1);
+ const list=document.getElementById("leaderList");
+ const query=(document.getElementById("leaderSearch").value||"").toLowerCase();
+ const sort=document.getElementById("leaderSort").value;
+ const me=state.username||"Flexer";
+ let html="";
+ for(let rank=1;rank<=450;rank++){
+  const isMe=rank===1;
+  const name=isMe?me:"Waiting for player";
+  const detail=isMe?`Your local profile · Level ${levelForXP(state.xp)}`:"Empty ranking slot · Real player data not connected";
+  const score=isMe?(sort==="wins"?state.wins:sort==="xp"?state.xp:levelForXP(state.xp)):"—";
+  if(query&&!name.toLowerCase().includes(query)&&!String(rank).includes(query))continue;
+  html+=`<div class="item-row"><div class="rank">#${rank}</div><div style="flex:1;min-width:0"><strong>${esc(name)}${isMe?' <span class="pill">YOU</span>':''}</strong><div class="muted">${detail}</div></div><strong>${score}</strong></div>`;
+ }
+ list.innerHTML=html||'<div class="empty">No matching positions.</div>';
 }
-
-/* Direct peer-to-peer video calls */
-async function enableMedia(){
-  if(mediaStream)return true;
-  if(!navigator.mediaDevices?.getUserMedia){
-    $("cameraStatus").textContent="Camera access requires HTTPS and a supported browser.";
-    return false;
-  }
-  try{
-    mediaStream=await navigator.mediaDevices.getUserMedia({video:true,audio:true});
-    $("camera").srcObject=mediaStream;
-    $("cameraStatus").textContent="Camera and microphone ready.";
-    $("muteButton").disabled=false;
-    return true;
-  }catch(e){
-    $("cameraStatus").textContent="Allow camera and microphone access to continue.";
-    return false;
-  }
+function renderOwner(){
+ document.getElementById("ownerStatus").textContent=OWNER_AUTH_READY?"Owner access must still be confirmed by the connected server.":"Owner account verification is not connected. Owner powers remain disabled.";
 }
-function createPrivateRoom(){
-  if(!window.Peer){$("privateStatus").textContent="The video-call library failed to load. Refresh and try again.";return;}
-  if(peer)peer.destroy();
-  peer=new Peer();
-  $("privateStatus").textContent="Creating your room connection...";
-  peer.on("open",id=>{
-    $("privateCode").value=id;
-    $("privateStatus").textContent="Your peer ID is ready. Share it with your friend to connect.";
-  });
-  peer.on("call",call=>{
-    activeCall=call;
-    if(!mediaStream){call.close();return;}
-    call.answer(mediaStream);
-    attachCall(call);
-  });
-  peer.on("error",err=>{
-    $("privateStatus").textContent="Connection error: "+err.type;
-  });
+function saveProfile(){
+ state.username=(document.getElementById("username").value.trim().slice(0,20)||"Flexer");
+ persist();render();
+ document.getElementById("profileStatus").textContent="Profile saved in this browser.";
 }
-async function joinPrivateRoom(){
-  const id=$("privateCode").value.trim();
-  if(!id){$("privateStatus").textContent="Enter your friend's peer ID first.";return;}
-  if(!await enableMedia())return;
-  if(!window.Peer){$("privateStatus").textContent="Video-call library unavailable.";return;}
-  if(!peer){
-    peer=new Peer();
-    peer.on("open",()=>callPeer(id));
-    peer.on("call",call=>{
-      activeCall=call;call.answer(mediaStream);attachCall(call);
-    });
-    peer.on("error",err=>$("privateStatus").textContent="Connection error: "+err.type);
-  }else{
-    callPeer(id);
-  }
-}
-function callPeer(id){
-  if(!peer||!mediaStream)return;
-  activeCall=peer.call(id,mediaStream);
-  if(activeCall)attachCall(activeCall);
-}
-function attachCall(call){
-  call.on("stream",stream=>{
-    $("opponentCamera").srcObject=stream;
-    $("opponentStatus").textContent="Opponent connected.";
-    $("privateStatus").textContent="Video and audio connection established.";
-    $("roundStatus").textContent="You are connected. Start your 15-second round.";
-  });
-  call.on("close",()=>{
-    $("opponentCamera").srcObject=null;
-    $("opponentStatus").textContent="Opponent disconnected.";
-    activeCall=null;
-  });
-  call.on("error",()=>{$("opponentStatus").textContent="Call failed. Try reconnecting.";});
-}
-async function copyRoomCode(){
-  const code=$("privateCode").value.trim();
-  if(!code){$("privateStatus").textContent="Create a room first.";return;}
-  try{await navigator.clipboard.writeText(code);$("privateStatus").textContent="Room ID copied.";}
-  catch(e){$("privateStatus").textContent="Copy this ID manually: "+code;}
-}
-function toggleMute(){
-  if(!mediaStream)return;
-  micMuted=!micMuted;
-  mediaStream.getAudioTracks().forEach(t=>t.enabled=!micMuted);
-  $("muteButton").textContent=micMuted?"🔇 Unmute Mic":"🎙️ Mute Mic";
-}
-function disconnectCall(){
-  clearInterval(timerInterval);roundRunning=false;
-  if(activeCall){activeCall.close();activeCall=null;}
-  if(peer){peer.destroy();peer=null;}
-  if(mediaStream){mediaStream.getTracks().forEach(t=>t.stop());mediaStream=null;}
-  $("camera").srcObject=null;$("opponentCamera").srcObject=null;
-  $("cameraStatus").textContent="Camera is off.";
-  $("opponentStatus").textContent="Waiting for an opponent...";
-  $("muteButton").disabled=true;$("muteButton").textContent="🎙️ Mute Mic";
-  micMuted=false;seconds=15;updateTimer();
-  $("startButton").disabled=false;
-  $("roundStatus").textContent="Disconnected.";
-}
-
-/* Global queue UI — requires a real shared backend */
 function joinGlobalQueue(){
-  $("queueStatus").textContent="Global queue isn't connected yet. A shared matchmaking server is required to pair players across devices.";
-  $("queueButton").textContent="Waiting for Backend";
-  $("queueButton").disabled=true;
-  $("queueList").textContent=""; 
+ document.getElementById("globalStatus").textContent="Global matchmaking requires a backend before it can pair you with real players.";
+ document.getElementById("globalQueueBtn").disabled=true;
+ document.getElementById("globalQueueBtn").textContent="Backend Needed";
 }
 function leaveGlobalQueue(){
-  $("queueStatus").textContent="Not in the global queue.";
-  $("queueButton").textContent="Join Global Queue";
-  $("queueButton").disabled=false;
+ document.getElementById("globalStatus").textContent="You are not queued. Live matchmaking is not connected.";
+ document.getElementById("globalQueueBtn").disabled=false;
+ document.getElementById("globalQueueBtn").textContent="Join Global Queue";
 }
-
-/* Local demo timer. It only starts after a video call is connected. */
-function updateTimer(){
-  $("timer").textContent=seconds+"s";
-  $("timer").classList.toggle("warning",seconds<=5);
-  $("timerBar").style.width=(seconds/15*100)+"%";
+function createPrivateRoom(){
+ const code="FLEX-"+Math.random().toString(36).slice(2,7).toUpperCase();
+ document.getElementById("roomCode").value=code;
+ document.getElementById("roomStatus").textContent="Demo code created: "+code+". Server-managed room membership is not connected.";
+}
+function joinPrivateRoom(){
+ const code=document.getElementById("roomCode").value.trim();
+ document.getElementById("roomStatus").textContent=code?"Code entered: "+code+". A backend must verify the code, enforce the 50-player waiting limit, and pair players.":"Enter a room code first.";
+}
+async function toggleCamera(){
+ const video=document.getElementById("myVideo");
+ if(cameraStream){
+  cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null;video.srcObject=null;video.style.display="none";document.getElementById("myVideoBox").style.display="grid";document.getElementById("cameraBtn").textContent="📷 Turn On Camera";document.getElementById("cameraStatus").textContent="Camera is off.";return;
+ }
+ try{
+  cameraStream=await navigator.mediaDevices.getUserMedia({video:true,audio:false});
+  video.srcObject=cameraStream;video.style.display="block";document.getElementById("myVideoBox").style.display="none";document.getElementById("cameraBtn").textContent="📷 Turn Off Camera";document.getElementById("cameraStatus").textContent="Local camera preview only; not broadcasting.";
+ }catch(e){document.getElementById("cameraStatus").textContent="Camera unavailable. Allow permission and use HTTPS.";}
+}
+async function toggleMic(){
+ if(!micStream){
+  try{micStream=await navigator.mediaDevices.getUserMedia({audio:true,video:false});}
+  catch(e){document.getElementById("cameraStatus").textContent="Microphone permission was not granted.";return;}
+ }
+ micOn=!micOn;micStream.getAudioTracks().forEach(t=>t.enabled=micOn);
+ document.getElementById("muteBtn").textContent=micOn?"🎙️ Mic On":"🎙️ Mic Off";
+ document.getElementById("cameraStatus").textContent=micOn?"Microphone enabled locally; not broadcasting to an opponent.":"Microphone muted.";
 }
 function startRound(){
-  if(!activeCall||!activeCall.open){
-    $("roundStatus").textContent="Connect to an opponent using a private room before starting.";
-    return;
-  }
-  clearInterval(timerInterval);seconds=15;roundRunning=true;
-  $("resultCard").style.display="none";$("startButton").disabled=true;
-  $("roundStatus").textContent="Battle live! 15 seconds.";
+ if(timerInterval !== null) return;
+ timerRemaining=15;
+ updateTimer();
+ const startButton=document.getElementById("startRoundBtn");
+ if(startButton)startButton.disabled=true;
+ document.getElementById("timerStatus").textContent="Practice round running. Timer controls are locked.";
+ timerInterval=setInterval(()=>{
+  timerRemaining=Math.max(0,timerRemaining-1);
   updateTimer();
-  timerInterval=setInterval(()=>{
-    seconds--;updateTimer();
-    if(seconds<=0){
-      clearInterval(timerInterval);roundRunning=false;
-      $("startButton").disabled=false;
-      $("resultCard").style.display="block";
-      $("resultTitle").textContent="Time's up!";
-      $("resultText").textContent="The round ended. AI judging and synchronized results require the backend.";
-      $("roundStatus").textContent="Round finished.";
-    }
-  },1000);
-}
-function rematch(){
-  if(!activeCall||!activeCall.open){
-    $("roundStatus").textContent="Reconnect to your opponent before rematching.";
-    return;
+  if(timerRemaining<=0){
+   clearInterval(timerInterval);
+   timerInterval=null;
+   if(startButton)startButton.disabled=false;
+   document.getElementById("timerStatus").textContent="Practice round complete. No opponent result recorded.";
   }
-  startRound();
+ },1000);
 }
-function saveMessage(inputId,key,messageId){
-  const value=$(inputId).value.trim();
-  if(!value){$(messageId).textContent="Enter a message first.";return;}
-  try{
-    const list=JSON.parse(localStorage.getItem(key)||"[]");
-    list.push({text:value,date:new Date().toISOString()});
-    localStorage.setItem(key,JSON.stringify(list));
-    $(inputId).value="";
-    $(messageId).textContent="Saved in this browser only. It was not sent to an administrator.";
-  }catch(e){$(messageId).textContent="Could not save in this browser.";}
+function updateTimer(){
+ document.getElementById("timerNum").textContent=timerRemaining;
+ document.getElementById("timerBar").style.width=(timerRemaining/15*100)+"%";
 }
-async function copyText(value){
-  try{await navigator.clipboard.writeText(value);alert("Copied!");}
-  catch(e){alert(value);}
+function openSocial(id){
+ try{const url=new URL(document.getElementById(id).value.trim());if(!["https:","http:"].includes(url.protocol))throw new Error();window.open(url.href,"_blank","noopener,noreferrer");}
+ catch(e){alert("Enter a valid URL starting with https://");}
 }
-
-updateUI();
+function saveSuggestion(){
+ state.suggestion=document.getElementById("suggestion").value.slice(0,1000);persist();
+ document.getElementById("suggestionStatus").textContent="Suggestion saved on this device only.";
+}
+buildNav();
+render();
+renderLevels();
 renderShop();
-renderTitles();
-renderProfile();
+renderCollection();
 renderLeaderboard();
+renderOwner();
 updateTimer();
+window.addEventListener("beforeunload",()=>{
+ if(cameraStream)cameraStream.getTracks().forEach(t=>t.stop());
+ if(micStream)micStream.getTracks().forEach(t=>t.stop());
+ if(timerInterval)clearInterval(timerInterval);
+});
 </script>
 </body>
 </html>
